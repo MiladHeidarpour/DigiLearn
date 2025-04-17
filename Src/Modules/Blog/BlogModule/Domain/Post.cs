@@ -7,7 +7,7 @@ namespace BlogModule.Domain;
 
 [Index("Slug", IsUnique = true)]
 [Table("Posts",Schema = "dbo")]
-public class Post : BaseEntity
+internal class Post : BaseEntity
 {
     [MaxLength(80)]
     public string Title { get; set; }

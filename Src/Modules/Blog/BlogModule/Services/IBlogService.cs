@@ -6,14 +6,23 @@ namespace BlogModule.Services;
 
 public interface IBlogService
 {
-    //Command
+    //Category Command
     Task<OperationResult> CreateCategory(CreateCategoryCommand command);
     Task<OperationResult> EditCategory(EditCategoryCommand command);
     Task<OperationResult> DeleteCategory(Guid categoryId);
 
 
+    //Post Command
+    Task<OperationResult> CreatePost(CreatePostCommand command);
+    Task<OperationResult> EditPost(EditPostCommand command);
+    Task<OperationResult> DeletePost(Guid postId);
 
-    // Query
+
+    //Category Query
     Task<List<BlogCategoryDto>> GetAllCategories();
     Task<BlogCategoryDto> GetCategoryById(Guid categoryId);
+
+    //Post Query
+
+    Task<BlogPostDto?> GetPostById(Guid postId);
 }

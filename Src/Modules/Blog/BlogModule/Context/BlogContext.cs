@@ -9,6 +9,6 @@ public class BlogContext : DbContext
 
     }
 
-    public DbSet<Category> Categories { get; set; }
-    public DbSet<Post> Posts { get; set; }
+    internal DbSet<Category> Categories { get; set; }
+    internal DbSet<Post> Posts { get; set; }
 }

@@ -9,4 +9,9 @@ internal class PostRepository : BaseRepository<Post, BlogContext>, IPostReposito
     public PostRepository(BlogContext context) : base(context)
     {
     }
+
+    public void Delete(Post post)
+    {
+        Context.Posts.Remove(post);
+    }
 }

@@ -5,12 +5,16 @@ using BlogModule.Services.Dtos.Queries;
 
 namespace BlogModule;
 
-public class MapperProfile:Profile
+public class MapperProfile : Profile
 {
     public MapperProfile()
     {
+        CreateMap<Category, BlogCategoryDto>().ReverseMap();
         CreateMap<Category, CreateCategoryCommand>().ReverseMap();
         CreateMap<Category, EditCategoryCommand>().ReverseMap();
-        CreateMap<Category, BlogCategoryDto>().ReverseMap();
+
+        CreateMap<BlogPostDto, Post>().ReverseMap();
+        CreateMap<CreatePostCommand, Post>().ReverseMap();
+        CreateMap<EditPostCommand, Post>().ReverseMap();
     }
 }
