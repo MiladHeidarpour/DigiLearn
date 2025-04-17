@@ -2,13 +2,13 @@
 using Microsoft.EntityFrameworkCore;
 namespace BlogModule.Context;
 
-public class BlogContext : DbContext
+class BlogContext : DbContext
 {
     public BlogContext(DbContextOptions<BlogContext> option) : base(option)
     {
 
     }
 
-    internal DbSet<Category> Categories { get; set; }
-    internal DbSet<Post> Posts { get; set; }
+    public DbSet<Category> Categories { get; set; }
+    public DbSet<Post> Posts { get; set; }
 }

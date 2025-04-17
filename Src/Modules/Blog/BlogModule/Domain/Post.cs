@@ -6,8 +6,8 @@ using Microsoft.EntityFrameworkCore;
 namespace BlogModule.Domain;
 
 [Index("Slug", IsUnique = true)]
-[Table("Posts",Schema = "dbo")]
-internal class Post : BaseEntity
+[Table("Posts", Schema = "dbo")]
+class Post : BaseEntity
 {
     [MaxLength(80)]
     public string Title { get; set; }
