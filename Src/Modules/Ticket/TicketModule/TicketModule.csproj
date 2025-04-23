@@ -18,11 +18,11 @@
 
 	<ItemGroup>
 	  <Folder Include="Core\Dtos\Queries\" />
-	  <Folder Include="Core\Services\" />
 	  <Folder Include="Data\Entities\" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\..\..\Commons\Common.Application\Common.Application.csproj" />
 	  <ProjectReference Include="..\..\..\Commons\Common.Domain\Common.Domain.csproj" />
 	</ItemGroup>
 </Project>
