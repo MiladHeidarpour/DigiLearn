@@ -2,7 +2,7 @@
 using Common.Application;
 using Common.Application.SecurityUtil;
 using Microsoft.EntityFrameworkCore;
-using TicketModule.Core.Dtos.Command;
+using TicketModule.Core.Dtos.Commands;
 using TicketModule.Core.Dtos.Queries;
 using TicketModule.Data;
 using TicketModule.Data.Entities;

@@ -37,6 +37,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserModule.Data", "Src\Modu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserModule.Core", "Src\Modules\User\UserModule.Core\UserModule.Core.csproj", "{D5924F78-E9A0-434E-8B7C-0C4C234DAB51}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Query", "Src\Commons\Common.Query\Common.Query.csproj", "{74215188-E94B-4BCC-905F-953452DC038E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,6 +73,10 @@ Global
 		{D5924F78-E9A0-434E-8B7C-0C4C234DAB51}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D5924F78-E9A0-434E-8B7C-0C4C234DAB51}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D5924F78-E9A0-434E-8B7C-0C4C234DAB51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74215188-E94B-4BCC-905F-953452DC038E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74215188-E94B-4BCC-905F-953452DC038E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74215188-E94B-4BCC-905F-953452DC038E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74215188-E94B-4BCC-905F-953452DC038E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -89,5 +95,6 @@ Global
 		{4D621725-653E-444B-AADC-C89FBE4A7BA7} = {FC1505F1-F0E3-4B2F-8A3A-FB3A69AB0610}
 		{2CF7967F-7A29-4B12-ACA6-1B8F66C91498} = {4D621725-653E-444B-AADC-C89FBE4A7BA7}
 		{D5924F78-E9A0-434E-8B7C-0C4C234DAB51} = {4D621725-653E-444B-AADC-C89FBE4A7BA7}
+		{74215188-E94B-4BCC-905F-953452DC038E} = {0D36B1EF-3666-4518-AE4B-A4AB4E861302}
 	EndGlobalSection
 EndGlobal

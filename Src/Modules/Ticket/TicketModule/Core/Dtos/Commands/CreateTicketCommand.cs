@@ -1,6 +1,6 @@
 ﻿using TicketModule.Data.Entities;
 
-namespace TicketModule.Core.Dtos.Command;
+namespace TicketModule.Core.Dtos.Commands;
 
 public class CreateTicketCommand
 {

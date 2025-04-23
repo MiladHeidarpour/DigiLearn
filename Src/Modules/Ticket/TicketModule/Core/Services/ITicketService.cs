@@ -1,5 +1,5 @@
 ﻿using Common.Application;
-using TicketModule.Core.Dtos.Command;
+using TicketModule.Core.Dtos.Commands;
 using TicketModule.Core.Dtos.Queries;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 

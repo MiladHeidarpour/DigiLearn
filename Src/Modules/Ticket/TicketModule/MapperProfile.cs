@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using TicketModule.Core.Dtos.Command;
+using TicketModule.Core.Dtos.Commands;
 using TicketModule.Core.Dtos.Queries;
 using TicketModule.Data.Entities;
 
