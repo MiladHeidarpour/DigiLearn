@@ -1,0 +1,38 @@
+﻿@page
+@model DigiLearn.Web.Pages.Auth.RegisterModel
+@{
+    Layout = "Shared/_Auth";
+    ViewData["Title"] = "ثبت نام در سایت";
+}
+<form class="row register mt-4 pt-0">
+    <div class="userName mb-5 col-12 col-xl-6 col-lg-6">
+        <input type="text" class="form-control" placeholder="نام کاربری" required />
+    </div>
+    <div class="phone mb-5 col-12 col-xl-6 col-lg-6">
+        <input type="number" class="form-control" required placeholder="موبایل" />
+    </div>
+
+    <div class="email mb-5 col-12 col-xl-12 col-lg-12">
+        <input type="email" class="form-control" placeholder="ایمیل" required />
+    </div>
+    <div class="password mb-5 col-12 col-xl-6 col-lg-6">
+        <input type="password" class="form-control" required placeholder="کلمه عبور" />
+    </div>
+    <div class="rePassword mb-5 col-12 col-xl-6 col-lg-6">
+        <input type="password" class="form-control" required placeholder="تکرار کلمه عبور" />
+    </div>
+    <button class="btn btn-success btn-register  mt-4 d-flex justify-content-center align-items-center">
+        <span> ثبت نام</span>
+        <i class="fa fa-chevron-left"></i>
+    </button>
+</form>
+<div class="login-footer">
+    <a href="#">
+        <i class="zmdi zmdi-lock"></i>
+        کلمه عبور خود را فراموش کرده ام !
+    </a>
+    <a href="/Login.html">
+        <i class="zmdi zmdi-sign-in"></i>
+        ورود به سایت
+    </a>
+</div>

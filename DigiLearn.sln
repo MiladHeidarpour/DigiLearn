@@ -39,6 +39,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserModule.Core", "Src\Modu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Query", "Src\Commons\Common.Query\Common.Query.csproj", "{74215188-E94B-4BCC-905F-953452DC038E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DigiLearn.Web", "Src\EndPoints\DigiLearn.Web\DigiLearn.Web.csproj", "{AF599E59-3D63-4603-9313-295FF555F254}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,6 +79,10 @@ Global
 		{74215188-E94B-4BCC-905F-953452DC038E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{74215188-E94B-4BCC-905F-953452DC038E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{74215188-E94B-4BCC-905F-953452DC038E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF599E59-3D63-4603-9313-295FF555F254}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF599E59-3D63-4603-9313-295FF555F254}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF599E59-3D63-4603-9313-295FF555F254}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF599E59-3D63-4603-9313-295FF555F254}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -96,5 +102,6 @@ Global
 		{2CF7967F-7A29-4B12-ACA6-1B8F66C91498} = {4D621725-653E-444B-AADC-C89FBE4A7BA7}
 		{D5924F78-E9A0-434E-8B7C-0C4C234DAB51} = {4D621725-653E-444B-AADC-C89FBE4A7BA7}
 		{74215188-E94B-4BCC-905F-953452DC038E} = {0D36B1EF-3666-4518-AE4B-A4AB4E861302}
+		{AF599E59-3D63-4603-9313-295FF555F254} = {267D34DE-0524-4B24-BE53-F2C6ACA2C62E}
 	EndGlobalSection
 EndGlobal
