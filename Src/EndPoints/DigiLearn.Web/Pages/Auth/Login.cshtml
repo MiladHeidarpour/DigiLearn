@@ -4,17 +4,19 @@
     Layout = "Shared/_Auth";
     ViewData["Title"] = "ورود به حساب";
 }
-<form class="login mt-4 pt-0">
-    <div class="emailOrUserName">
-        <p>ایمیل یا نام کاربری</p>
-        <input type="text" class="form-control" required />
+<form method="post" class="login mt-4 pt-0">
+    <div class="emailOrUserNam">
+        <p>شماره تلفن</p>
+        <input type="text" asp-for="PhoneNumber" class="form-control" maxlength="11" />
+        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
     </div>
     <div class="password mt-5">
         <p>کلمه عبور </p>
-        <input type="password" class="form-control" required />
+        <input type="password" asp-for="Password" class="form-control" />
+        <span asp-validation-for="Password" class="text-danger"></span>
     </div>
     <div class="checkbox mt-4">
-        <input type="checkbox" id="check1" />
+        <input type="checkbox" asp-for="IsRememberMe" value="true" id="check1" />
         <span checkfor="check1">مرا بخاطر بسپار</span>
     </div>
     <button class="btn btn-success btn-login mt-4 d-flex justify-content-center align-items-center">
@@ -27,7 +29,7 @@
         <i class="zmdi zmdi-lock"></i>
         کلمه عبور خود را فراموش کرده ام !
     </a>
-    <a href="/Register.html">
+    <a asp-page="Register">
         <i class="zmdi zmdi-account-add"></i>
         عضویت در سایت
     </a>

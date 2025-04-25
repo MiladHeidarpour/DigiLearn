@@ -10,4 +10,5 @@ public class UserDto
     public string Password { get; set; }
     public string Avatar { get; set; }
     public DateTime CreationDate { get; set; }
+    public List<RoleDto> Roles { get; set; } = new();
 }
