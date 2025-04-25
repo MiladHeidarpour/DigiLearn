@@ -70,7 +70,6 @@ public class LoginModel : BaseRazor
                 Secure = true,
             });
         }
-       
 
         return RedirectToPage("../Index");
     }

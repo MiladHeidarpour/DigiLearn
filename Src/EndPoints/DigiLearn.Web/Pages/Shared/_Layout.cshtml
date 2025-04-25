@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="/css/owl.carousel.min.css">
     <link rel="stylesheet" href="/css/owl.theme.default.min.css">
     <link rel="stylesheet" href="/css/main.min.css">
+    @await RenderSectionAsync("Meta",false)
 </head>
 
 <body>
@@ -236,21 +237,21 @@
                     </a>
                 </li>
             </ul>
-            <div class="auth">
-
-                <i class="zmdi zmdi-account auth-link" data-toggle="tooltip" data-placement="right"
-                   title="حساب کاربری"></i>
-
-                <div class="sub">
-                    <a asp-page="Login">
-                        ورود
-                    </a>
-                    <a asp-page="Register">
-                        ثبت نام
-                    </a>
-
-                </div>
-            </div>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <a asp-page="/Profile/Index" class="auth">
+                    <i class="zmdi zmdi-account auth-link" data-toggle="tooltip" data-placement="right"
+                       title="حساب کاربری"></i>
+                </a>
+            }
+            else
+            {
+                <a asp-page="/Auth/Login" class="auth">
+                    <i class="zmdi zmdi-sign-in auth-link" data-toggle="tooltip" data-placement="right"
+                       title="ورود به حساب"></i>
+                </a>
+            }
+            
         </div>
         @await RenderSectionAsync("MiddleHeader", required: false)
 
