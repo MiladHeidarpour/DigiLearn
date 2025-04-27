@@ -1,5 +1,6 @@
 ﻿using Common.Application;
 using MediatR;
+using UserModule.Core.Commands.ChangePassword;
 using UserModule.Core.Commands.Users.Edit;
 using UserModule.Core.Commands.Users.Register;
 using UserModule.Core.Queries.Users.Dtos;
@@ -22,6 +23,11 @@ public class UserFacade : IUserFacade
     }
 
     public async Task<OperationResult> EditUserProfile(EditUserCommand command)
+    {
+        return await _mediator.Send(command);
+    }
+
+    public async Task<OperationResult> ChangePassword(ChangeUserPasswordCommand command)
     {
         return await _mediator.Send(command);
     }
