@@ -1,5 +1,6 @@
 ﻿using Common.Application;
 using MediatR;
+using UserModule.Core.Commands.Users.Edit;
 using UserModule.Core.Commands.Users.Register;
 using UserModule.Core.Queries.Users.Dtos;
 using UserModule.Core.Queries.Users.GetByPhoneNumber;
@@ -16,6 +17,11 @@ public class UserFacade : IUserFacade
     }
 
     public async Task<OperationResult<Guid>> RegisterUser(RegisterUserCommand command)
+    {
+        return await _mediator.Send(command);
+    }
+
+    public async Task<OperationResult> EditUserProfile(EditUserCommand command)
     {
         return await _mediator.Send(command);
     }
