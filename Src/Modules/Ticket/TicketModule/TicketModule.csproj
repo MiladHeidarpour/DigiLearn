@@ -17,7 +17,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Core\Dtos\Queries\" />
 	  <Folder Include="Data\Entities\" />
 	</ItemGroup>
 
@@ -25,5 +24,6 @@
 	  <ProjectReference Include="..\..\..\Commons\Common.Application\Common.Application.csproj" />
 	  <ProjectReference Include="..\..\..\Commons\Common.Domain\Common.Domain.csproj" />
 	  <ProjectReference Include="..\..\..\Commons\Common.Infrastructure\Common.Infrastructure.csproj" />
+	  <ProjectReference Include="..\..\..\Commons\Common.Query\Common.Query.csproj" />
 	</ItemGroup>
 </Project>

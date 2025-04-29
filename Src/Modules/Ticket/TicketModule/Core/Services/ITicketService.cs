@@ -14,4 +14,5 @@ public interface ITicketService
 
     //Query
     Task<TicketDto> GetTicketById(Guid ticketId);
+    Task<TicketFilterResult> GetTicketsByFilter(TicketFilterParams filterParams);
 }

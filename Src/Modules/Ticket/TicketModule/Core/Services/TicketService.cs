@@ -79,4 +79,30 @@ class TicketService : ITicketService
 
         return _mapper.Map<TicketDto>(ticket.TicketMessages);
     }
+
+    public async Task<TicketFilterResult> GetTicketsByFilter(TicketFilterParams filterParams)
+    {
+        var result = _context.Ticket.AsQueryable();
+
+        if (filterParams.UserId is not null)
+        {
+            result = result.Where(f => f.UserId == filterParams.UserId);
+        }
+
+        var skip = (filterParams.PageId - 1) * filterParams.Take;
+        var data = new TicketFilterResult()
+        {
+            Data = await result.Skip(skip).Take(filterParams.Take)
+                .Select(n => new TicketFilterData
+                {
+                    Id = n.Id,
+                    UserId = n.UserId,
+                    Title = n.Title,
+                    Status = n.TicketStatus,
+                    CreationDate = n.CreationDate
+                }).ToListAsync()
+        };
+        data.GeneratePaging(result, filterParams.Take, filterParams.PageId);
+        return data;
+    }
 }
