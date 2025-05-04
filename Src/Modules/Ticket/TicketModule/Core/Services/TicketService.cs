@@ -35,6 +35,9 @@ class TicketService : ITicketService
         if (ticket == null)
             return OperationResult.NotFound("تیکتی یافت نشد");
 
+        if (string.IsNullOrWhiteSpace(command.Text))
+            return OperationResult.Error("متن پیام را وراد کنید");
+
         var message = new TicketMessage()
         {
             Text = command.Text.SanitizeText(),
@@ -71,13 +74,13 @@ class TicketService : ITicketService
         return OperationResult.Success();
     }
 
-    public async Task<TicketDto> GetTicketById(Guid ticketId)
+    public async Task<TicketDto?> GetTicketById(Guid ticketId)
     {
         var ticket = await _context.Ticket
             .Include(f => f.TicketMessages)
             .FirstOrDefaultAsync(f => f.Id == ticketId);
 
-        return _mapper.Map<TicketDto>(ticket.TicketMessages);
+        return _mapper.Map<TicketDto>(ticket);
     }
 
     public async Task<TicketFilterResult> GetTicketsByFilter(TicketFilterParams filterParams)

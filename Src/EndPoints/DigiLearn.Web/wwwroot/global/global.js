@@ -40,16 +40,15 @@ $("form").submit(
         } else {
         }
     });
-function deleteItem(url, errorTitle, errorText) {
-    if (errorTitle == null || errorTitle == "undefined") {
-        errorTitle = "عملیات ناموفق";
+function deleteItem(url, description) {
+
+    if (description == null || description == "") {
+        description = "آیا از حذف اطمینان دارید ؟";
     }
-    if (errorText == null || errorText == "undefined") {
-        errorText = "";
-    }
+
     Swal.fire({
         title: "هشدار !!",
-        text: "آیا از حذف اطمینان دارید ؟",
+        text: description,
         icon: "warning",
         confirmButtonText: "بله",
         showCancelButton: true,

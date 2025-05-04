@@ -13,6 +13,6 @@ public interface ITicketService
     Task<OperationResult> CloseTicket(Guid ticketId);
 
     //Query
-    Task<TicketDto> GetTicketById(Guid ticketId);
+    Task<TicketDto?> GetTicketById(Guid ticketId);
     Task<TicketFilterResult> GetTicketsByFilter(TicketFilterParams filterParams);
 }

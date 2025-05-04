@@ -23,7 +23,7 @@ public class IndexModel : BaseRazorFilter<TicketFilterParams>
         FilterResult = await _ticketService.GetTicketsByFilter(new TicketFilterParams()
         {
             UserId = User.GetUserId(),
-            Take = FilterParams.Take,
+            Take = 10,
             PageId = FilterParams.PageId,
         });
     }

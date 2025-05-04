@@ -14,3 +14,10 @@
 .input-validation-error {
     border-color: red;
 }
+
+
+.ticket-Body .chat-me label {
+    font-size: 11px;
+    color: white;
+    left: 0
+}
