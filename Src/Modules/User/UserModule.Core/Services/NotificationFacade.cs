@@ -3,6 +3,7 @@ using MediatR;
 using UserModule.Core.Commands.Notifications.Create;
 using UserModule.Core.Commands.Notifications.Delete;
 using UserModule.Core.Commands.Notifications.DeleteAll;
+using UserModule.Core.Commands.Notifications.Seen;
 using UserModule.Core.Queries.Notifications.Dtos;
 using UserModule.Core.Queries.Notifications.GetByFilter;
 
@@ -28,6 +29,11 @@ class NotificationFacade : INotificationFacade
     }
 
     public async Task<OperationResult> DeleteAll(DeleteAllNotificationCommand command)
+    {
+        return await _mediator.Send(command);
+    }
+
+    public async Task<OperationResult> Seen(SeenNotificationCommand command)
     {
         return await _mediator.Send(command);
     }

@@ -23,7 +23,8 @@ public class GetNotificationByFilterQueryHandler : IQueryHandler<GetNotification
 
     public async Task<NotificationFilterResult> Handle(GetNotificationByFilterQuery request, CancellationToken cancellationToken)
     {
-        var result = _context.Notifications.Where(r => r.UserId == request.FilterParams.UserId).AsQueryable();
+        var result = _context.Notifications.Where(r => r.UserId == request.FilterParams.UserId)
+            .OrderBy(f=>f.IsSeen).AsQueryable();
 
         if (request.FilterParams.IsSeen is not null)
         {
