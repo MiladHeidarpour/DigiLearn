@@ -1,15 +1,21 @@
 ﻿using Common.Domain;
 using Common.Domain.Exceptions;
 using Common.Domain.ValueObjects;
+using CoreModules.Domain.Course.DomainServices;
 using CoreModules.Domain.Course.Enums;
 
-namespace CoreModules.Domain.Course.Entities;
+namespace CoreModules.Domain.Course.Models;
 
 public class Course : BaseEntity
 {
-    public Course(Guid teacherId, string title, string description, string imageName, string? videoName, int price, CourseLevel courseLevel, SeoData seoData)
+    public Course(Guid teacherId, string title, string description, string imageName, string? videoName, int price,
+        CourseLevel courseLevel, SeoData seoData, Guid categoryId, Guid subCategoryId, string slug, ICourseDomainService domainService)
     {
-        Guard(title, description, imageName);
+        Guard(title, description, imageName,slug);
+        if (domainService.IsSlugExist(slug))
+        {
+            throw new InvalidDomainDataException("Slug Is Exist");
+        }
         TeacherId = teacherId;
         Title = title;
         Description = description;
@@ -19,12 +25,18 @@ public class Course : BaseEntity
         LastUpdate = DateTime.Now;
         CourseLevel = courseLevel;
         SeoData = seoData;
+        CategoryId = categoryId;
+        SubCategoryId = subCategoryId;
+        Slug = slug;
         CourseStatus = CourseStatus.StartSoon;
         Sections = new();
     }
 
     public Guid TeacherId { get; private set; }
+    public Guid CategoryId { get; private set; }
+    public Guid SubCategoryId { get; private set; }
     public string Title { get; private set; }
+    public string Slug { get;private set; }
     public string Description { get; private set; }
     public string ImageName { get; private set; }
     public string? VideoName { get; private set; }
@@ -39,12 +51,22 @@ public class Course : BaseEntity
 
     public void AddSection(string title, int displayOrder)
     {
-        if (Sections.Any(f=>f.Title==title))
+        if (Sections.Any(f => f.Title == title))
         {
             throw new InvalidDomainDataException("Title is Exist");
         }
 
-        Sections.Add(new Section(title, displayOrder,Id));
+        Sections.Add(new Section(title, displayOrder, Id));
+    }
+
+    public void EditSection(Guid sectionId, string title, int displayOrder)
+    {
+        var section = Sections.FirstOrDefault(f => f.Id == sectionId);
+
+        if (section == null)
+            throw new InvalidDomainDataException("Section NotFound");
+
+        section.Edit(title, displayOrder);
     }
 
     public void RemoveSection(Guid sectionId)
@@ -57,7 +79,7 @@ public class Course : BaseEntity
         Sections.Remove(section);
     }
 
-    public void AddEpisode(Guid sectionId,Guid token, string title, TimeSpan timeSpan, string videoExtension, string? attachmentExtension, bool isActive, string englishTitle)
+    public void AddEpisode(Guid sectionId, Guid token, string title, TimeSpan timeSpan, string videoExtension, string? attachmentExtension, bool isActive, string englishTitle)
     {
         var section = Sections.FirstOrDefault(f => f.Id == sectionId);
 
@@ -74,12 +96,36 @@ public class Course : BaseEntity
         }
         var vidName = $"{episodeTitle}.{videoExtension}";
 
-        section.AddEpisode(token,title,timeSpan,vidName,attName,isActive,englishTitle);
+
+        if (isActive is true)
+        {
+            LastUpdate = DateTime.Now;
+            if (CourseStatus == CourseStatus.StartSoon)
+            {
+                CourseStatus = CourseStatus.InProgress;
+            }
+        }
+        section.AddEpisode(token, title, timeSpan, vidName, attName, isActive, englishTitle);
     }
 
-    public void Guard(string title, string description, string imageName)
+    public void AcceptEpisode(Guid episodeId)
+    {
+        var section = Sections.FirstOrDefault(f => f.Episodes.Any(e => e.Id == episodeId && e.IsActive == false));
+        if (section is null)
+        {
+            throw new NullOrEmptyDomainDataException();
+        }
+
+        var episode = section.Episodes.First(f => f.Id == episodeId);
+
+        episode.ToggleStatus();
+        LastUpdate = DateTime.Now;
+    }
+
+    public void Guard(string title, string description, string imageName,string slug)
     {
         NullOrEmptyDomainDataException.CheckString(title, nameof(title));
+        NullOrEmptyDomainDataException.CheckString(slug, nameof(slug));
         NullOrEmptyDomainDataException.CheckString(description, nameof(description));
         NullOrEmptyDomainDataException.CheckString(imageName, nameof(imageName));
     }

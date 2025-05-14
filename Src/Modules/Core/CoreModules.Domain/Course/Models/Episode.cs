@@ -2,7 +2,7 @@
 using Common.Domain.Exceptions;
 using Common.Domain.Utils;
 
-namespace CoreModules.Domain.Course.Entities;
+namespace CoreModules.Domain.Course.Models;
 
 public class Episode:BaseEntity
 {
@@ -27,6 +27,12 @@ public class Episode:BaseEntity
     public string VideoName { get;private set; }
     public string? AttachmentName { get;private set; }
     public bool IsActive { get;private set; }
+
+
+    public void ToggleStatus()
+    {
+        IsActive = !IsActive;
+    }
 
     void Guard( string title, string videoName, string englishTitle)
     {
