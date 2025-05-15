@@ -6,4 +6,28 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="CategoryAgg\Create\" />
+    <Folder Include="CategoryAgg\Edit\" />
+    <Folder Include="CategoryAgg\Delete\" />
+    <Folder Include="CourseAgg\Create\" />
+    <Folder Include="CourseAgg\Edit\" />
+    <Folder Include="CourseAgg\Episodes\Add\" />
+    <Folder Include="CourseAgg\Episodes\Edit\" />
+    <Folder Include="CourseAgg\Episodes\Accept\" />
+    <Folder Include="CourseAgg\Episodes\Delete\" />
+    <Folder Include="CourseAgg\Sections\Add\" />
+    <Folder Include="CourseAgg\Sections\Edit\" />
+    <Folder Include="CourseAgg\Sections\Delete\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.17" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Commons\Common.Application\Common.Application.csproj" />
+    <ProjectReference Include="..\CoreModules.Domain\CoreModules.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
