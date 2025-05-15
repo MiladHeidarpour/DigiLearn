@@ -2,7 +2,7 @@
 using Common.Domain.Exceptions;
 using Common.Domain.Utils;
 
-namespace CoreModules.Domain.Course.Models;
+namespace CoreModules.Domain.CourseAgg.Models;
 
 public class Episode:BaseEntity
 {

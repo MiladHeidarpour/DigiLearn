@@ -7,12 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Category\DomainServices\" />
-    <Folder Include="Category\Repositories\" />
-    <Folder Include="Course\Events\" />
-    <Folder Include="Course\Exceptions\" />
-    <Folder Include="Course\Models\" />
-    <Folder Include="Course\Enums\" />
+    <Compile Remove="Course\**" />
+    <Compile Remove="Teacher\**" />
+    <EmbeddedResource Remove="Course\**" />
+    <EmbeddedResource Remove="Teacher\**" />
+    <None Remove="Course\**" />
+    <None Remove="Teacher\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="CourseAgg\Events\" />
+    <Folder Include="CourseAgg\Exceptions\" />
   </ItemGroup>
 
   <ItemGroup>

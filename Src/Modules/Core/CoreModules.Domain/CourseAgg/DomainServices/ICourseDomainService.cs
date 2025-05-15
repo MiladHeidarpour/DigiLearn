@@ -1,4 +1,4 @@
-﻿namespace CoreModules.Domain.Course.DomainServices;
+﻿namespace CoreModules.Domain.CourseAgg.DomainServices;
 
 public interface ICourseDomainService
 {

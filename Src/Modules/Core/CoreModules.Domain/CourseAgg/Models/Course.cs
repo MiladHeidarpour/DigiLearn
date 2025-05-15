@@ -1,12 +1,12 @@
 ﻿using Common.Domain;
 using Common.Domain.Exceptions;
 using Common.Domain.ValueObjects;
-using CoreModules.Domain.Course.DomainServices;
-using CoreModules.Domain.Course.Enums;
+using CoreModules.Domain.CourseAgg.DomainServices;
+using CoreModules.Domain.CourseAgg.Enums;
 
-namespace CoreModules.Domain.Course.Models;
+namespace CoreModules.Domain.CourseAgg.Models;
 
-public class Course : BaseEntity
+public class Course : AggregateRoot
 {
     public Course(Guid teacherId, string title, string description, string imageName, string? videoName, int price,
         CourseLevel courseLevel, SeoData seoData, Guid categoryId, Guid subCategoryId, string slug, ICourseDomainService domainService)

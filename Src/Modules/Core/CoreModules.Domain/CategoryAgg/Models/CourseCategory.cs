@@ -1,11 +1,11 @@
 ﻿using Common.Domain;
 using Common.Domain.Exceptions;
 using Common.Domain.Utils;
-using CoreModules.Domain.Category.DomainServices;
+using CoreModules.Domain.CategoryAgg.DomainServices;
 
-namespace CoreModules.Domain.Category.Models;
+namespace CoreModules.Domain.CategoryAgg.Models;
 
-public class CourseCategory:BaseEntity
+public class CourseCategory: AggregateRoot
 {
     public CourseCategory(string title, string slug, Guid? parentId, ICategoryDomainService domainService)
     {
