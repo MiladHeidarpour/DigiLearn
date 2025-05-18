@@ -11,7 +11,7 @@ public class Course : AggregateRoot
     public Course(Guid teacherId, string title, string description, string imageName, string? videoName, int price,
         CourseLevel courseLevel, SeoData seoData, Guid categoryId, Guid subCategoryId, string slug, ICourseDomainService domainService)
     {
-        Guard(title, description, imageName,slug);
+        Guard(title, description, imageName, slug);
         if (domainService.IsSlugExist(slug))
         {
             throw new InvalidDomainDataException("Slug Is Exist");
@@ -36,7 +36,7 @@ public class Course : AggregateRoot
     public Guid CategoryId { get; private set; }
     public Guid SubCategoryId { get; private set; }
     public string Title { get; private set; }
-    public string Slug { get;private set; }
+    public string Slug { get; private set; }
     public string Description { get; private set; }
     public string ImageName { get; private set; }
     public string? VideoName { get; private set; }
@@ -48,6 +48,31 @@ public class Course : AggregateRoot
 
     public List<Section> Sections { get; private set; }
 
+    public void Edit(string title, string description, string imageName, string? videoName, int price,
+        CourseLevel courseLevel, CourseStatus courseStatus, SeoData seoData, Guid categoryId, Guid subCategoryId, string slug, ICourseDomainService domainService)
+    {
+        Guard(title, description, imageName, slug);
+        if (Slug != slug)
+        {
+            if (domainService.IsSlugExist(slug))
+            {
+                throw new InvalidDomainDataException("Slug Is Exist");
+            }
+        }
+
+        Title = title;
+        Description = description;
+        ImageName = imageName;
+        VideoName = videoName;
+        Price = price;
+        LastUpdate = DateTime.Now;
+        CourseLevel = courseLevel;
+        SeoData = seoData;
+        CategoryId = categoryId;
+        SubCategoryId = subCategoryId;
+        Slug = slug;
+        CourseStatus = courseStatus;
+    }
 
     public void AddSection(string title, int displayOrder)
     {
@@ -122,7 +147,7 @@ public class Course : AggregateRoot
         LastUpdate = DateTime.Now;
     }
 
-    public void Guard(string title, string description, string imageName,string slug)
+    public void Guard(string title, string description, string imageName, string slug)
     {
         NullOrEmptyDomainDataException.CheckString(title, nameof(title));
         NullOrEmptyDomainDataException.CheckString(slug, nameof(slug));
