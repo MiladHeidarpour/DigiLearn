@@ -5,9 +5,9 @@ using MongoDB.Driver.Linq;
 
 namespace CoreModule.Infrastructure.Persistent.CategoryAgg;
 
-public class CategoryRepository : BaseRepository<CourseCategory, CoreModuleEFContext>, ICategoryRepository
+public class CourseCategoryRepository : BaseRepository<CourseCategory, CoreModuleEFContext>, ICourseCategoryRepository
 {
-    public CategoryRepository(CoreModuleEFContext context) : base(context)
+    public CourseCategoryRepository(CoreModuleEFContext context) : base(context)
     {
     }
 

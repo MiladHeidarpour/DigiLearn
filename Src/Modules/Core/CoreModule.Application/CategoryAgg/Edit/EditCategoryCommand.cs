@@ -15,10 +15,10 @@ public class EditCategoryCommand : IBaseCommand
 
 public class EditCategoryCommandHandler : IBaseCommandHandler<EditCategoryCommand>
 {
-    private readonly ICategoryRepository _repository;
+    private readonly ICourseCategoryRepository _repository;
     private readonly ICategoryDomainService _domainService;
 
-    public EditCategoryCommandHandler(ICategoryRepository repository, ICategoryDomainService domainService)
+    public EditCategoryCommandHandler(ICourseCategoryRepository repository, ICategoryDomainService domainService)
     {
         _repository = repository;
         _domainService = domainService;

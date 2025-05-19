@@ -14,10 +14,10 @@ public class CreateCategoryCommand:IBaseCommand
 
 public class CreateCategoryCommandHandler:IBaseCommandHandler<CreateCategoryCommand>
 {
-    private readonly ICategoryRepository _repository;
+    private readonly ICourseCategoryRepository _repository;
     private readonly ICategoryDomainService _domainService;
 
-    public CreateCategoryCommandHandler(ICategoryRepository repository, ICategoryDomainService domainService)
+    public CreateCategoryCommandHandler(ICourseCategoryRepository repository, ICategoryDomainService domainService)
     {
         _repository = repository;
         _domainService = domainService;

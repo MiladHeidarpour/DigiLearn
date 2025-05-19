@@ -7,9 +7,9 @@ public record DeleteCategoryCommand(Guid CategoryId) : IBaseCommand;
 
 public class DeleteCategoryCommandHandler:IBaseCommandHandler<DeleteCategoryCommand>
 {
-    private readonly ICategoryRepository _repository;
+    private readonly ICourseCategoryRepository _repository;
 
-    public DeleteCategoryCommandHandler(ICategoryRepository repository)
+    public DeleteCategoryCommandHandler(ICourseCategoryRepository repository)
     {
         _repository = repository;
     }

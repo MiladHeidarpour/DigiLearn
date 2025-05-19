@@ -15,10 +15,10 @@ public class AddCategoryChildCommand:IBaseCommand
 
 public class AddCategoryChildCommandHandler:IBaseCommandHandler<AddCategoryChildCommand>
 {
-    private readonly ICategoryRepository _repository;
+    private readonly ICourseCategoryRepository _repository;
     private readonly ICategoryDomainService _domainService;
 
-    public AddCategoryChildCommandHandler(ICategoryRepository repository, ICategoryDomainService domainService)
+    public AddCategoryChildCommandHandler(ICourseCategoryRepository repository, ICategoryDomainService domainService)
     {
         _repository = repository;
         _domainService = domainService;
