@@ -1,4 +1,5 @@
 ﻿using Common.Infrastructure;
+using CoreModule.Infrastructure.Persistent.CourseAgg;
 using CoreModule.Infrastructure.Persistent.UserAgg;
 using CoreModules.Domain.CategoryAgg.Models;
 using CoreModules.Domain.CourseAgg.Models;
@@ -28,6 +29,7 @@ public class CoreModuleEFContext:BaseEfContext<CoreModuleEFContext>
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.HasDefaultSchema("dbo");
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(CourseConfig).Assembly);
         base.OnModelCreating(modelBuilder);
     }
 }

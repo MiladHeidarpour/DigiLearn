@@ -9,6 +9,7 @@ public class TeacherConfig:IEntityTypeConfiguration<Teacher>
 {
     public void Configure(EntityTypeBuilder<Teacher> builder)
     {
+        builder.ToTable("Teachers");
         builder.HasKey(b=>b.Id);
         builder.HasIndex(b=>b.UserName).IsUnique();
         builder.Property(b => b.UserName)

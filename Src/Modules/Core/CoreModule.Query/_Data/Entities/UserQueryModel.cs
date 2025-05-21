@@ -1,10 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Common.Domain;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Common.Domain;
 
-namespace CoreModule.Infrastructure.Persistent.UserAgg;
+namespace CoreModule.Query._Data.Entities;
 
-class User:BaseEntity
+[Table("Users", Schema = "dbo")]
+class UserQueryModel : BaseEntity
 {
     [MaxLength(12)]
     public string PhoneNumber { get; set; }

@@ -6,4 +6,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Commons\Common.Query\Common.Query.csproj" />
+    <ProjectReference Include="..\CoreModule.Infrastructure\CoreModule.Infrastructure.csproj" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.1.0" />
+  </ItemGroup>
+
 </Project>
