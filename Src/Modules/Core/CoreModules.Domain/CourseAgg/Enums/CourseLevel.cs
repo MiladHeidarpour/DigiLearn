@@ -1,4 +1,4 @@
-﻿namespace CoreModules.Domain.CourseAgg.Enums;
+﻿namespace CoreModule.Domain.CourseAgg.Enums;
 
 public enum CourseLevel
 {

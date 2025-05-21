@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using Common.Domain;
 using Common.Domain.ValueObjects;
-using CoreModules.Domain.CourseAgg.Enums;
+using CoreModule.Domain.CourseAgg.Enums;
 
 namespace CoreModule.Query._Data.Entities;
 

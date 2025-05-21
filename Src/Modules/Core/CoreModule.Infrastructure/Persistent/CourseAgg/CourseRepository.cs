@@ -1,6 +1,6 @@
 ﻿using Common.Infrastructure.Repository;
-using CoreModules.Domain.CourseAgg.Models;
-using CoreModules.Domain.CourseAgg.Repositories;
+using CoreModule.Domain.CourseAgg.Models;
+using CoreModule.Domain.CourseAgg.Repositories;
 
 namespace CoreModule.Infrastructure.Persistent.CourseAgg;
 

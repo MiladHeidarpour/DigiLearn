@@ -1,5 +1,5 @@
-﻿using CoreModule.Infrastructure.Persistent.UserAgg;
-using CoreModules.Domain.TeacherAgg.Models;
+﻿using CoreModule.Domain.TeacherAgg.Models;
+using CoreModule.Infrastructure.Persistent.UserAgg;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

@@ -5,10 +5,10 @@ using Common.Application.SecurityUtil;
 using Common.Domain.ValueObjects;
 using CoreModule.Application._Utilities;
 using CoreModule.Application.CourseAgg.Create;
-using CoreModules.Domain.CourseAgg.DomainServices;
-using CoreModules.Domain.CourseAgg.Enums;
-using CoreModules.Domain.CourseAgg.Models;
-using CoreModules.Domain.CourseAgg.Repositories;
+using CoreModule.Domain.CourseAgg.DomainServices;
+using CoreModule.Domain.CourseAgg.Enums;
+using CoreModule.Domain.CourseAgg.Models;
+using CoreModule.Domain.CourseAgg.Repositories;
 using FluentValidation;
 using Microsoft.AspNetCore.Http;
 

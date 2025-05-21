@@ -1,4 +1,4 @@
-﻿namespace CoreModules.Domain.TeacherAgg.DomainServices;
+﻿namespace CoreModule.Domain.TeacherAgg.DomainServices;
 
 public interface ITeacherDomainService
 {

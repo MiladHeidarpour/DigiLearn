@@ -1,9 +1,9 @@
 ﻿using Common.Infrastructure;
+using CoreModule.Domain.CategoryAgg.Models;
+using CoreModule.Domain.CourseAgg.Models;
+using CoreModule.Domain.TeacherAgg.Models;
 using CoreModule.Infrastructure.Persistent.CourseAgg;
 using CoreModule.Infrastructure.Persistent.UserAgg;
-using CoreModules.Domain.CategoryAgg.Models;
-using CoreModules.Domain.CourseAgg.Models;
-using CoreModules.Domain.TeacherAgg.Models;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 

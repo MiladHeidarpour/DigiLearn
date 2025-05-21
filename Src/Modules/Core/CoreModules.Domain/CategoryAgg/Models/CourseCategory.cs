@@ -1,9 +1,9 @@
 ﻿using Common.Domain;
 using Common.Domain.Exceptions;
 using Common.Domain.Utils;
-using CoreModules.Domain.CategoryAgg.DomainServices;
+using CoreModule.Domain.CategoryAgg.DomainServices;
 
-namespace CoreModules.Domain.CategoryAgg.Models;
+namespace CoreModule.Domain.CategoryAgg.Models;
 
 public class CourseCategory: AggregateRoot
 {

@@ -1,5 +1,5 @@
 ﻿using Common.Application;
-using CoreModules.Domain.TeacherAgg.Repositories;
+using CoreModule.Domain.TeacherAgg.Repositories;
 
 namespace CoreModule.Application.TeacherAgg.AcceptRequest;
 

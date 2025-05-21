@@ -1,4 +1,4 @@
-﻿using CoreModules.Domain.CategoryAgg.Models;
+﻿using CoreModule.Domain.CategoryAgg.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

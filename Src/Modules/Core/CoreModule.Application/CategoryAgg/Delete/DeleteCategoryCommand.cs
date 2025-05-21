@@ -1,5 +1,5 @@
 ﻿using Common.Application;
-using CoreModules.Domain.CategoryAgg.Repositories;
+using CoreModule.Domain.CategoryAgg.Repositories;
 
 namespace CoreModule.Application.CategoryAgg.Delete;
 

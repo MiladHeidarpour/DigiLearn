@@ -1,7 +1,7 @@
 ﻿using Common.Application;
-using CoreModules.Domain.CategoryAgg.DomainServices;
-using CoreModules.Domain.CategoryAgg.Models;
-using CoreModules.Domain.CategoryAgg.Repositories;
+using CoreModule.Domain.CategoryAgg.DomainServices;
+using CoreModule.Domain.CategoryAgg.Models;
+using CoreModule.Domain.CategoryAgg.Repositories;
 using FluentValidation;
 
 namespace CoreModule.Application.CategoryAgg.AddChild;

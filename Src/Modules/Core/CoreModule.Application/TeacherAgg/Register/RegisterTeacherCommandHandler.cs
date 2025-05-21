@@ -1,9 +1,9 @@
 ﻿using Common.Application;
 using Common.Application.FileUtil.Interfaces;
 using CoreModule.Application._Utilities;
-using CoreModules.Domain.TeacherAgg.DomainServices;
-using CoreModules.Domain.TeacherAgg.Models;
-using CoreModules.Domain.TeacherAgg.Repositories;
+using CoreModule.Domain.TeacherAgg.DomainServices;
+using CoreModule.Domain.TeacherAgg.Models;
+using CoreModule.Domain.TeacherAgg.Repositories;
 
 namespace CoreModule.Application.TeacherAgg.Register;
 

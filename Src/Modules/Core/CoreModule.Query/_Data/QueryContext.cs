@@ -1,6 +1,7 @@
 ﻿using CoreModule.Query._Data.Entities;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace CoreModule.Query._Data;
 
 class QueryContext : DbContext

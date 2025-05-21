@@ -1,4 +1,4 @@
-﻿namespace CoreModules.Domain.CategoryAgg.DomainServices;
+﻿namespace CoreModule.Domain.CategoryAgg.DomainServices;
 
 public interface ICategoryDomainService
 {

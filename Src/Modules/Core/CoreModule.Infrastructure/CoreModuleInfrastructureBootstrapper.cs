@@ -1,10 +1,10 @@
-﻿using CoreModule.Infrastructure.Persistent;
+﻿using CoreModule.Domain.CategoryAgg.Repositories;
+using CoreModule.Domain.CourseAgg.Repositories;
+using CoreModule.Domain.TeacherAgg.Repositories;
+using CoreModule.Infrastructure.Persistent;
 using CoreModule.Infrastructure.Persistent.CategoryAgg;
 using CoreModule.Infrastructure.Persistent.CourseAgg;
 using CoreModule.Infrastructure.Persistent.TeacherAgg;
-using CoreModules.Domain.CategoryAgg.Repositories;
-using CoreModules.Domain.CourseAgg.Repositories;
-using CoreModules.Domain.TeacherAgg.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

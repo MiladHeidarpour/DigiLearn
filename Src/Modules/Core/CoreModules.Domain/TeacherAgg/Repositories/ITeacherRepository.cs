@@ -1,7 +1,7 @@
 ﻿using Common.Domain.Repository;
-using CoreModules.Domain.TeacherAgg.Models;
+using CoreModule.Domain.TeacherAgg.Models;
 
-namespace CoreModules.Domain.TeacherAgg.Repositories;
+namespace CoreModule.Domain.TeacherAgg.Repositories;
 
 public interface ITeacherRepository : IBaseRepository<Teacher>
 {

@@ -1,6 +1,6 @@
 ﻿using Common.Infrastructure.Repository;
-using CoreModules.Domain.TeacherAgg.Models;
-using CoreModules.Domain.TeacherAgg.Repositories;
+using CoreModule.Domain.TeacherAgg.Models;
+using CoreModule.Domain.TeacherAgg.Repositories;
 
 namespace CoreModule.Infrastructure.Persistent.TeacherAgg;
 

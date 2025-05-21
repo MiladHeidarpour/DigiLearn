@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using Common.Domain;
-using CoreModules.Domain.TeacherAgg.Enums;
+using CoreModule.Domain.TeacherAgg.Enums;
 
 namespace CoreModule.Query._Data.Entities;
 

@@ -1,4 +1,4 @@
-﻿using CoreModules.Domain.CourseAgg.Models;
+﻿using CoreModule.Domain.CourseAgg.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

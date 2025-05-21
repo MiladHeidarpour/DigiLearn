@@ -1,6 +1,6 @@
 ﻿using Common.Infrastructure.Repository;
-using CoreModules.Domain.CategoryAgg.Models;
-using CoreModules.Domain.CategoryAgg.Repositories;
+using CoreModule.Domain.CategoryAgg.Models;
+using CoreModule.Domain.CategoryAgg.Repositories;
 using MongoDB.Driver.Linq;
 
 namespace CoreModule.Infrastructure.Persistent.CategoryAgg;

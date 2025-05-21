@@ -43,7 +43,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DigiLearn.Web", "Src\EndPoi
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{918FCC8E-0DF8-42AA-A4CC-2599900E4DD9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreModules.Domain", "Src\Modules\Core\CoreModules.Domain\CoreModules.Domain.csproj", "{96A44ED7-4FDC-4613-B1A1-BE08DC50E440}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreModule.Domain", "Src\Modules\Core\CoreModules.Domain\CoreModule.Domain.csproj", "{96A44ED7-4FDC-4613-B1A1-BE08DC50E440}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreModule.Application", "Src\Modules\Core\CoreModule.Application\CoreModule.Application.csproj", "{596E7584-89B4-49C2-A29A-56310268ADAA}"
 EndProject
