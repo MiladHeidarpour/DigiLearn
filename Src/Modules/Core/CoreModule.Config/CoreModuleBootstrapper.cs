@@ -1,4 +1,10 @@
-﻿using CoreModule.Application.CategoryAgg.Create;
+﻿using CoreModule.Application.CategoryAgg;
+using CoreModule.Application.CategoryAgg.Create;
+using CoreModule.Application.CourseAgg;
+using CoreModule.Application.TeacherAgg;
+using CoreModule.Domain.CategoryAgg.DomainServices;
+using CoreModule.Domain.CourseAgg.DomainServices;
+using CoreModule.Domain.TeacherAgg.DomainServices;
 using CoreModule.Facade;
 using CoreModule.Infrastructure;
 using CoreModule.Query;
@@ -20,7 +26,9 @@ public static class CoreModuleBootstrapper
         services.AddMediatR(typeof(CreateCategoryCommand).Assembly);
         services.AddValidatorsFromAssembly(typeof(CreateCategoryCommandValidator).Assembly);
 
-
+        services.AddScoped<ICourseDomainService, CourseDomainService>();
+        services.AddScoped<ITeacherDomainService, TeacherDomainService>();
+        services.AddScoped<ICategoryDomainService, CategoryDomainService>();
 
         return services;
     }

@@ -15,7 +15,7 @@ public class TeacherConfig:IEntityTypeConfiguration<Teacher>
         builder.Property(b => b.UserName)
             .IsRequired()
             .IsUnicode(false)
-            .HasMaxLength(0);
+            .HasMaxLength(50);
 
         builder.HasOne<User>()
             .WithOne()

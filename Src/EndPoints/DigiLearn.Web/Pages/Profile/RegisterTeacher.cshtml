@@ -1,7 +1,7 @@
 ﻿@page
-@model DigiLearn.Web.Pages.Profile.EditModel
+@model DigiLearn.Web.Pages.Profile.RegisterTeacherModel
 @{
-    ViewData["Title"] = "ویرایش اطلاعات پروفایل";
+    ViewData["Title"] = "ثبت نام مدرس";
 }
 @section Meta
 {
@@ -42,20 +42,21 @@
                             @ViewData["Title"]
                         </p>
                         <div class="info-body p-2">
-                            <form method="post" class="row">
-                                <div class="col-12 col-lg-6 col-md-6 mb-3">
-                                    @Html.EditorFor(f => f.Name)
-                                </div>
-                                <div class="col-12 col-lg-6 col-md-6 mb-3">
-                                    @Html.EditorFor(f => f.Family)
-                                </div>
-                                <div class="col-12">
-                                    @Html.EditorFor(f => f.Email)
-                                </div>
-                                <div class="col-12">
-                                    <button class="btn  btn-save  mt-3">ویرایش اطلاعات</button>
+
+                            <form method="post" enctype="multipart/form-data">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        @Html.EditorFor(f => f.UserName)
+                                    </div>
+                                    <div class="col-md-6">
+                                        @Html.EditorFor(f => f.CvFile)
+                                    </div>
+                                    <div class="col-12">
+                                        <button class="btn  btn-save  mt-3">ثبت درخواست</button>
+                                    </div>
                                 </div>
                             </form>
+
                         </div>
                     </div>
                 </div>
@@ -63,7 +64,3 @@
         </div>
     </div>
 </main>
-
-@section Scripts {
-    <partial name="Shared/_ValidationScriptsPartial" />
-}

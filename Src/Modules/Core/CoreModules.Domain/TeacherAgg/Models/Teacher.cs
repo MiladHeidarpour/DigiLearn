@@ -8,6 +8,10 @@ namespace CoreModule.Domain.TeacherAgg.Models;
 
 public class Teacher : AggregateRoot
 {
+    private Teacher()
+    {
+        
+    }
     public Teacher(Guid userId, string userName, string cvFileName, ITeacherDomainService domainService)
     {
         Guard(userName, cvFileName);
@@ -18,7 +22,7 @@ public class Teacher : AggregateRoot
         }
 
         UserId = userId;
-        UserName = userName;
+        UserName = userName.ToLower();
         CvFileName = cvFileName;
         Status = TeacherStatus.Pending;
     }
