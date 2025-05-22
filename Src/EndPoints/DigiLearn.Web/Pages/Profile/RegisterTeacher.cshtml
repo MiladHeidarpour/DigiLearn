@@ -2,65 +2,31 @@
 @model DigiLearn.Web.Pages.Profile.RegisterTeacherModel
 @{
     ViewData["Title"] = "ثبت نام مدرس";
-}
-@section Meta
-{
-    <link rel="stylesheet" href="/css/profile.min.css">
+    Layout = "Shared/_ProfileLayout";
 }
 
+<div class="row ">
+    <div class="col-12 info shadow pl-0 pr-0">
+        <p class="title">
+            <i class="fa fa-address-card-o"></i>
+            @ViewData["Title"]
+        </p>
+        <div class="info-body p-2">
 
-<main>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12 breadcrumb">
-                <ul class="">
-                    <li>
-                        <a href="/">
-                            خانه
-                            <i class="fa fa-chevron-left"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/profile" class="current">
-                            پنل کاربری
-                        </a>
-                    </li>
-                    <li>
-                        <a class="current">
-                            @ViewData["Title"]
-                        </a>
-                    </li>
-                </ul>
-
-            </div>
-            <partial name="Shared/_ProfileSideBar" />
-            <div class="col-12 col-xl-9 col-lg-9 col-md-8 profile-body">
-                <div class="row ">
-                    <div class="col-12 info shadow pl-0 pr-0">
-                        <p class="title">
-                            <i class="fa fa-address-card-o"></i>
-                            @ViewData["Title"]
-                        </p>
-                        <div class="info-body p-2">
-
-                            <form method="post" enctype="multipart/form-data">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        @Html.EditorFor(f => f.UserName)
-                                    </div>
-                                    <div class="col-md-6">
-                                        @Html.EditorFor(f => f.CvFile)
-                                    </div>
-                                    <div class="col-12">
-                                        <button class="btn  btn-save  mt-3">ثبت درخواست</button>
-                                    </div>
-                                </div>
-                            </form>
-
-                        </div>
+            <form method="post" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-md-6">
+                        @Html.EditorFor(f => f.UserName)
+                    </div>
+                    <div class="col-md-6">
+                        @Html.EditorFor(f => f.CvFile)
+                    </div>
+                    <div class="col-12">
+                        <button class="btn  btn-save  mt-3">ثبت درخواست</button>
                     </div>
                 </div>
-            </div>
+            </form>
+
         </div>
     </div>
-</main>
+</div>

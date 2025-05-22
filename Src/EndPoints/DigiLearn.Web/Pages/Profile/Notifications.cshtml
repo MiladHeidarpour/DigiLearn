@@ -3,103 +3,69 @@
 @model NotificationsModel
 @{
     ViewData["Title"] = "پیغام ها";
-}
-@section Meta
-{
-    <link rel="stylesheet" href="/css/profile.min.css">
+    Layout = "Shared/_ProfileLayout";
 }
 
+<div class="info shadow pl-0 pr-0">
+    <p class="title">
+        <i class="zmdi zmdi-notifications text-warning"></i>
+        @ViewData["Title"]
+        <delete-item data-toggle="tooltip" title="حذف همه" class="pull-left" style="cursor:pointer" url="@Url.Page("Notifications", "DeleteAll")" is-button-tag="false">
+            <i class="fa fa-trash-o text-danger" style="font-size: 25px;"></i>
+        </delete-item>
+    </p>
 
-<main>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12 breadcrumb">
-                <ul class="">
-                    <li>
-                        <a href="/">
-                            خانه
-                            <i class="fa fa-chevron-left"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/profile" class="current">
-                            پنل کاربری
-                        </a>
-                    </li>
-                    <li>
-                        <a class="current">
-                            @ViewData["Title"]
-                        </a>
-                    </li>
-                </ul>
-
-            </div>
-            <partial name="Shared/_ProfileSideBar" />
-            <div class="col-12 col-xl-9 col-lg-9 col-md-8 profile-body">
-                <div class="info shadow pl-0 pr-0">
-                    <p class="title">
-                        <i class="zmdi zmdi-notifications text-warning"></i>
-                        @ViewData["Title"]
-                        <delete-item data-toggle="tooltip" title="حذف همه" class="pull-left" style="cursor:pointer" url="@Url.Page("Notifications","DeleteAll")" is-button-tag="false">
-                            <i class="fa fa-trash-o text-danger" style="font-size: 25px;"></i>
-                        </delete-item>
-                    </p>
-
-                    <div class="info-body ">
-                        <div class="table-responsive">
-                            <table class="table text-center  table-hover  table-striped text-center">
-                                <thead>
-                                    <tr>
-                                        <th>متن</th>
-                                        <th>وضعیت</th>
-                                        <th>تاریخ</th>
-                                        <td></td>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @if (Model.FilterResult.EntityCount is 0)
+    <div class="info-body ">
+        <div class="table-responsive">
+            <table class="table text-center  table-hover  table-striped text-center">
+                <thead>
+                    <tr>
+                        <th>متن</th>
+                        <th>وضعیت</th>
+                        <th>تاریخ</th>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.FilterResult.EntityCount is 0)
+                    {
+                        <tr>
+                            <td colspan="4">موردی برای نمایش وجود ندارد</td>
+                        </tr>
+                    }
+                    else
+                    {
+                        @foreach (var item in Model.FilterResult.Data)
+                        {
+                            <tr>
+                                <td>
+                                    <p><b>@item.Title</b></p>
+                                    <p> @item.Text</p>
+                                </td>
+                                <td>
+                                    <span class="badge @(item.IsSeen is true ? "badge-success" : "badge-danger")">
+                                        @(item.IsSeen is true ? "مشاهده شده" : "جدید")
+                                    </span>
+                                </td>
+                                <td>@item.CreationDate.ToPersianDateTime()</td>
+                                <td>
+                                    @if (item.IsSeen is false)
                                     {
-                                        <tr>
-                                            <td colspan="4">موردی برای نمایش وجود ندارد</td>
-                                        </tr>
+                                        <form method="post" asp-page-handler="SeenNotification" class="d-inline-block">
+                                            <input type="hidden" name="notificationId" value="@item.Id" />
+                                            <button data-toggle="tooltip" title="این پیام را خواندم" onclick="return confirm('آیا از انجام عملیات اطمینان دارید؟')" class="btn btn-success btn-sm"><i class="fa fa-check text-white"></i></button>
+                                        </form>
                                     }
-                                    else
-                                    {
-                                        @foreach (var item in Model.FilterResult.Data)
-                                        {
-                                            <tr>
-                                                <td>
-                                                    <p><b>@item.Title</b></p>
-                                                    <p> @item.Text</p>
-                                                </td>
-                                                <td>
-                                                    <span class="badge @(item.IsSeen is true ? "badge-success" : "badge-danger")">
-                                                        @(item.IsSeen is true ? "مشاهده شده" : "جدید")
-                                                    </span>
-                                                </td>
-                                                <td>@item.CreationDate.ToPersianDateTime()</td>
-                                                <td>
-                                                    @if (item.IsSeen is false)
-                                                    {
-                                                        <form method="post" asp-page-handler="SeenNotification" class="d-inline-block">
-                                                            <input type="hidden" name="notificationId" value="@item.Id" />
-                                                            <button data-toggle="tooltip" title="این پیام را خواندم" onclick="return confirm('آیا از انجام عملیات اطمینان دارید؟')" class="btn btn-success btn-sm"><i class="fa fa-check text-white"></i></button>
-                                                        </form>
-                                                    }
-                                                    <delete-item data-toggle="tooltip" title="حذف" class="btn btn-sm btn-danger" url="@Url.Page("Notifications", "Delete", new { notificationId = item.Id })">
-                                                        <i class="fa fa-trash"></i>
-                                                    </delete-item>
-                                                </td>
-                                            </tr>
-                                        }
-                                    }
-                                </tbody>
-                            </table>
-                        </div>
-                        <partial name="Shared/_Pagination" model="Model.FilterResult" />
-                    </div>
-                </div>
-            </div>
+                                    <delete-item data-toggle="tooltip" title="حذف" class="btn btn-sm btn-danger" url="@Url.Page("Notifications", "Delete", new { notificationId = item.Id })">
+                                        <i class="fa fa-trash"></i>
+                                    </delete-item>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
         </div>
+        <partial name="Shared/_Pagination" model="Model.FilterResult" />
     </div>
-</main>
+</div>
