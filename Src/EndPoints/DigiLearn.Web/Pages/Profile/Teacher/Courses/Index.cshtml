@@ -1,9 +1,11 @@
 ﻿@page
+@using Common.Application
 @using Common.Application.DateUtil
-@using TicketModule.Data.Entities
-@model DigiLearn.Web.Pages.Profile.Tickets.IndexModel
+@using CoreModule.Application._Utilities
+@using CoreModule.Domain.CourseAgg.Enums
+@model DigiLearn.Web.Pages.Profile.Teacher.Courses.IndexModel
 @{
-    ViewData["Title"] = "تیکت ها";
+    ViewData["Title"] = "دوره های مدرس";
     Layout = "Shared/_ProfileLayout";
     var counter = 1;
 }
@@ -12,25 +14,27 @@
     <div class="col-12 info shadow pl-0 pr-0">
         <p class="title">
             <i class="fa fa-paper-plane"></i>
-            تیکت ها
+            @ViewData["Title"]
         </p>
 
         <br>
-        <a asp-page="Add" class="btn btn-save mr-2 mb-4 float-right">ثبت تیکت جدید</a>
+        <a asp-page="Add" class="btn btn-save mr-2 mb-4 float-right">ثبت دوره جدید</a>
         <div class="info-body p-2">
             <div class="table-responsive">
                 <h5>
                     <i class="fa fa-list"></i>
-                    لیست تیکت ها
+                    لیست دوره ها
                 </h5>
                 <table class="table   table-hover  table-striped text-center">
                     <thead>
                         <tr>
                             <th>#</th>
+                            <th>عکس</th>
                             <th>عنوان</th>
+                            <th>قیمت</th>
                             <td>وضعیت</td>
                             <th>تاریخ ثبت</th>
-                            <td></td>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -38,23 +42,27 @@
                         {
                             <tr>
                                 <td>@counter</td>
-                                <td>@item.Title</td>
                                 <td>
-                                    @switch (item.Status)
+                                    <img src="@CoreModuleDirectories.GetCourseImage(item.ImageName)" style="max-width:200px" />
+                                </td>
+                                <td>@item.Title</td>
+                                <td>@item.Price.TooMan(true)</td>
+                                <td>
+                                    @switch (item.CourseActionStatus)
                                     {
-                                        case TicketStatus.Pending:
+                                        case CourseActionStatus.Pending:
                                             {
-                                                <span class="badge badge-info">در حال برسی</span>
+                                                <span class="badge badge-info">درحال برسی</span>
                                                 break;
                                             }
-                                        case TicketStatus.Answered:
+                                        case CourseActionStatus.Active:
                                             {
-                                                <span class="badge badge-success">پاسخ داده شده</span>
+                                                <span class="badge badge-success">فعال</span>
                                                 break;
                                             }
-                                        case TicketStatus.Closed:
+                                        case CourseActionStatus.DeActive:
                                             {
-                                                <span class="badge badge-danger">بسته شده</span>
+                                                <span class="badge badge-danger">غیرفعال</span>
                                                 break;
                                             }
                                     }
@@ -69,7 +77,7 @@
                         @if (Model.FilterResult.EntityCount is 0)
                         {
                             <tr>
-                                <td colspan="5">موردی برای نمایش وجود ندارد</td>
+                                <td colspan="7">موردی برای نمایش وجود ندارد</td>
                             </tr>
                         }
                     </tbody>

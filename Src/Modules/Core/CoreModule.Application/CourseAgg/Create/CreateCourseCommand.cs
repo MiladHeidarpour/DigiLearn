@@ -24,6 +24,7 @@ public class CreateCourseCommand : IBaseCommand
     public IFormFile? VideoFile { get; set; }
     public int Price { get; set; }
     public CourseLevel CourseLevel { get; set; }
+    public CourseActionStatus CourseActionStatus { get; set; }
     public SeoData SeoData { get; set; }
 }
 
@@ -58,7 +59,7 @@ class CreateCourseCommandHandle : IBaseCommandHandler<CreateCourseCommand>
 
         var imageName = await _localFileService.SaveFileAndGenerateName(request.ImageFile, CoreModuleDirectories.CourseImage);
         var course = new Course(request.TeacherId, request.Title, request.Description, imageName, videoPath, request.Price,
-            request.CourseLevel, request.SeoData, request.CategoryId, request.SubCategoryId, request.Slug, _domainService)
+            request.CourseLevel,request.CourseActionStatus, request.SeoData, request.CategoryId, request.SubCategoryId, request.Slug, _domainService)
         {
             Id = courseId,
         };

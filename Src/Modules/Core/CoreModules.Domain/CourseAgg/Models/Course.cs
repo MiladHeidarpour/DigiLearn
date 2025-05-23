@@ -8,12 +8,12 @@ namespace CoreModule.Domain.CourseAgg.Models;
 
 public class Course : AggregateRoot
 {
-    private Course()
+    private Course(CourseActionStatus courseActionStatus)
     {
-        
+        CourseActionStatus = courseActionStatus;
     }
     public Course(Guid teacherId, string title, string description, string imageName, string? videoName, int price,
-        CourseLevel courseLevel, SeoData seoData, Guid categoryId, Guid subCategoryId, string slug, ICourseDomainService domainService)
+        CourseLevel courseLevel,CourseActionStatus courseActionStatus, SeoData seoData, Guid categoryId, Guid subCategoryId, string slug, ICourseDomainService domainService)
     {
         Guard(title, description, imageName, slug);
         if (domainService.IsSlugExist(slug))
@@ -33,6 +33,7 @@ public class Course : AggregateRoot
         SubCategoryId = subCategoryId;
         Slug = slug;
         CourseStatus = CourseStatus.StartSoon;
+        CourseActionStatus = courseActionStatus;
         Sections = new();
     }
 
@@ -48,6 +49,7 @@ public class Course : AggregateRoot
     public DateTime LastUpdate { get; private set; }
     public CourseLevel CourseLevel { get; set; }
     public CourseStatus CourseStatus { get; set; }
+    public CourseActionStatus CourseActionStatus { get; set; }
     public SeoData SeoData { get; private set; }
 
     public List<Section> Sections { get; private set; }
