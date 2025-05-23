@@ -484,8 +484,11 @@ function loadCalender() {
 
 }
 function loadCkeditor5() {
-    if (!document.querySelector('.ckeditor5'))
+    //if (!document.querySelector('.ckeditor5'))
+    //    return;
+    if (!document.getElementById("ckeditor5"))
         return;
+
     $("body").prepend(`<script src="/ckeditor5/build/ckeditor.js"></script>`);
 
     ClassicEditor

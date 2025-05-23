@@ -16,7 +16,7 @@ class QueryContext : DbContext
     public DbSet<CourseQueryModel> Courses { get; set; }
     public DbSet<SectionQueryModel> Sections { get; set; }
     public DbSet<EpisodeQueryModel> Episodes { get; set; }
-    public DbSet<CategoryQueryModel> Categories { get; set; }
+    public DbSet<CategoryQueryModel> CourseCategories { get; set; }
 
     public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
     {

@@ -54,7 +54,7 @@ class CreateCourseCommandHandle : IBaseCommandHandler<CreateCourseCommand>
                 return OperationResult.Error("فایل وارد شده نامعتبر است");
             }
 
-            videoPath = await _ftpFileService.SaveFileAndGenerateName(request.VideoFile, CoreModuleDirectories.CourseDemo(courseId));
+            //videoPath = await _ftpFileService.SaveFileAndGenerateName(request.VideoFile, CoreModuleDirectories.CourseDemo(courseId));
         }
 
         var imageName = await _localFileService.SaveFileAndGenerateName(request.ImageFile, CoreModuleDirectories.CourseImage);
