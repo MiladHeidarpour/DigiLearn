@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Common.Infrastructure.Repository;
 
-public  class BaseRepository<T, TContext> : IBaseRepository<T>
+public class BaseRepository<T, TContext> : IBaseRepository<T>
     where TContext : DbContext where T : BaseEntity
 {
     protected readonly TContext Context;

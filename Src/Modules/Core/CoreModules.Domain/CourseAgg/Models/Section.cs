@@ -5,11 +5,11 @@ namespace CoreModule.Domain.CourseAgg.Models;
 
 public class Section : BaseEntity
 {
-    public Section(string title, int displayOrder, Guid courseId)
+    public Section(int displayOrder, string title, Guid courseId)
     {
-        NullOrEmptyDomainDataException.CheckString(title,nameof(title));
-        Title = title;
+        NullOrEmptyDomainDataException.CheckString(title, nameof(title));
         DisplayOrder = displayOrder;
+        Title = title;
         CourseId = courseId;
         Episodes = new List<Episode>();
     }
@@ -17,18 +17,20 @@ public class Section : BaseEntity
     public Guid CourseId { get; private set; }
     public string Title { get; private set; }
     public int DisplayOrder { get; private set; }
+
     public IEnumerable<Episode> Episodes { get; private set; }
 
 
-    public void Edit(string title, int displayOrder)
+    public void Edit(int displayOrder, string title)
     {
         NullOrEmptyDomainDataException.CheckString(title, nameof(title));
-        Title = title;
         DisplayOrder = displayOrder;
+        Title = title;
+    }
+    public void AddEpisode(string? attachmentName, string videoName, TimeSpan timeSpan, Guid token, string title, bool isActive, string englishTitle)
+    {
+        Episodes = Episodes.Append(new Episode(attachmentName, videoName, timeSpan, token, title, isActive, Id, englishTitle));
     }
 
-    public void AddEpisode(Guid token, string title, TimeSpan timeSpan, string videoName, string? attachmentName, bool isActive, string englishTitle)
-    {
-        Episodes = Episodes.Append(new Episode(token, title, timeSpan, videoName, attachmentName, isActive, Id,englishTitle));
-    }
+
 }

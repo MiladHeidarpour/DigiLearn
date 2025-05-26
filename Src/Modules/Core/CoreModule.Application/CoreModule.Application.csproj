@@ -12,7 +12,6 @@
     <Folder Include="CourseAgg\Episodes\Edit\" />
     <Folder Include="CourseAgg\Episodes\Accept\" />
     <Folder Include="CourseAgg\Episodes\Delete\" />
-    <Folder Include="CourseAgg\Sections\Add\" />
     <Folder Include="CourseAgg\Sections\Edit\" />
     <Folder Include="CourseAgg\Sections\Delete\" />
   </ItemGroup>

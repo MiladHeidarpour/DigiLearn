@@ -8,7 +8,6 @@ public class CategoryConfig : IEntityTypeConfiguration<CourseCategory>
 {
     public void Configure(EntityTypeBuilder<CourseCategory> builder)
     {
-        builder.HasKey(b => b.Id);
         builder.ToTable("Categories");
         builder.HasIndex(b => b.Slug).IsUnique();
 

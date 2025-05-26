@@ -8,32 +8,33 @@ namespace CoreModule.Domain.CourseAgg.Models;
 
 public class Course : AggregateRoot
 {
-    private Course(CourseActionStatus courseActionStatus)
+    private Course()
     {
-        CourseActionStatus = courseActionStatus;
+
     }
-    public Course(Guid teacherId, string title, string description, string imageName, string? videoName, int price,
-        CourseLevel courseLevel,CourseActionStatus courseActionStatus, SeoData seoData, Guid categoryId, Guid subCategoryId, string slug, ICourseDomainService domainService)
+    public Course(string title, Guid teacherId, string description, string imageName, string? videoName, int price,
+        SeoData seoData, CourseLevel courseLevel, Guid categoryId, Guid subCategoryId, string slug, CourseActionStatus status, ICourseDomainService domainService)
     {
         Guard(title, description, imageName, slug);
+
         if (domainService.IsSlugExist(slug))
-        {
-            throw new InvalidDomainDataException("Slug Is Exist");
-        }
-        TeacherId = teacherId;
+            throw new InvalidDomainDataException("Slug is Exist");
+
         Title = title;
+        TeacherId = teacherId;
         Description = description;
         ImageName = imageName;
         VideoName = videoName;
         Price = price;
         LastUpdate = DateTime.Now;
-        CourseLevel = courseLevel;
         SeoData = seoData;
+        CourseLevel = courseLevel;
         CategoryId = categoryId;
         SubCategoryId = subCategoryId;
         Slug = slug;
         CourseStatus = CourseStatus.StartSoon;
-        CourseActionStatus = courseActionStatus;
+        Status = status;
+
         Sections = new();
     }
 
@@ -47,24 +48,24 @@ public class Course : AggregateRoot
     public string? VideoName { get; private set; }
     public int Price { get; private set; }
     public DateTime LastUpdate { get; private set; }
-    public CourseLevel CourseLevel { get; set; }
-    public CourseStatus CourseStatus { get; set; }
-    public CourseActionStatus CourseActionStatus { get; set; }
     public SeoData SeoData { get; private set; }
+
+    public CourseLevel CourseLevel { get; private set; }
+    public CourseStatus CourseStatus { get; private set; }
+    public CourseActionStatus Status { get; set; }
 
     public List<Section> Sections { get; private set; }
 
+
+
     public void Edit(string title, string description, string imageName, string? videoName, int price,
-        CourseLevel courseLevel, CourseStatus courseStatus, SeoData seoData, Guid categoryId, Guid subCategoryId, string slug, ICourseDomainService domainService)
+        SeoData seoData, CourseLevel courseLevel, CourseStatus status, Guid categoryId, Guid subCategoryId, string slug, ICourseDomainService domainService)
     {
         Guard(title, description, imageName, slug);
+
         if (Slug != slug)
-        {
             if (domainService.IsSlugExist(slug))
-            {
-                throw new InvalidDomainDataException("Slug Is Exist");
-            }
-        }
+                throw new InvalidDomainDataException("Slug is Exist");
 
         Title = title;
         Description = description;
@@ -72,63 +73,50 @@ public class Course : AggregateRoot
         VideoName = videoName;
         Price = price;
         LastUpdate = DateTime.Now;
-        CourseLevel = courseLevel;
         SeoData = seoData;
+        CourseLevel = courseLevel;
         CategoryId = categoryId;
         SubCategoryId = subCategoryId;
         Slug = slug;
-        CourseStatus = courseStatus;
+        CourseStatus = status;
     }
-
-    public void AddSection(string title, int displayOrder)
+    public void AddSection(int displayOrder, string title)
     {
         if (Sections.Any(f => f.Title == title))
-        {
-            throw new InvalidDomainDataException("Title is Exist");
-        }
+            throw new InvalidDomainDataException("title Is Exist");
 
-        Sections.Add(new Section(title, displayOrder, Id));
+        Sections.Add(new Section(displayOrder, title, Id));
     }
-
-    public void EditSection(Guid sectionId, string title, int displayOrder)
+    public void EditSection(Guid sectionId, int displayOrder, string title)
     {
         var section = Sections.FirstOrDefault(f => f.Id == sectionId);
+        if (section == null) throw new InvalidDomainDataException("Section NotFound");
 
-        if (section == null)
-            throw new InvalidDomainDataException("Section NotFound");
-
-        section.Edit(title, displayOrder);
+        section.Edit(displayOrder, title);
     }
-
     public void RemoveSection(Guid sectionId)
     {
         var section = Sections.FirstOrDefault(f => f.Id == sectionId);
-
-        if (section == null)
-            throw new InvalidDomainDataException("Section NotFound");
+        if (section == null) throw new InvalidDomainDataException("Section NotFound");
 
         Sections.Remove(section);
     }
-
-    public void AddEpisode(Guid sectionId, Guid token, string title, TimeSpan timeSpan, string videoExtension, string? attachmentExtension, bool isActive, string englishTitle)
+    public void AddEpisode(Guid sectionId, string? attachmentExtension, string videoExtension, TimeSpan timeSpan, Guid token, string title, bool isActive, string englishTitle)
     {
-        var section = Sections.FirstOrDefault(f => f.Id == sectionId);
 
-        if (section == null)
-            throw new InvalidDomainDataException("Section NotFound");
+        var section = Sections.FirstOrDefault(f => f.Id == sectionId);
+        if (section == null) throw new InvalidDomainDataException("Section NotFound");
 
         var episodeCount = Sections.Sum(s => s.Episodes.Count());
         var episodeTitle = $"{episodeCount + 1}_{englishTitle}";
 
         string attName = null;
-        if (string.IsNullOrWhiteSpace(attachmentExtension) is false)
-        {
+
+        if (string.IsNullOrWhiteSpace(attachmentExtension) == false)
             attName = $"{episodeTitle}.{attachmentExtension}";
-        }
-        var vidName = $"{episodeTitle}.{videoExtension}";
+        var vidName = $"{episodeTitle}.${videoExtension}";
 
-
-        if (isActive is true)
+        if (isActive)
         {
             LastUpdate = DateTime.Now;
             if (CourseStatus == CourseStatus.StartSoon)
@@ -136,24 +124,20 @@ public class Course : AggregateRoot
                 CourseStatus = CourseStatus.InProgress;
             }
         }
-        section.AddEpisode(token, title, timeSpan, vidName, attName, isActive, englishTitle);
+        section.AddEpisode(attName, vidName, timeSpan, token, title, isActive, englishTitle);
     }
-
     public void AcceptEpisode(Guid episodeId)
     {
         var section = Sections.FirstOrDefault(f => f.Episodes.Any(e => e.Id == episodeId && e.IsActive == false));
-        if (section is null)
-        {
-            throw new NullOrEmptyDomainDataException();
-        }
+        if (section == null)
+            throw new InvalidDomainDataException();
 
         var episode = section.Episodes.First(f => f.Id == episodeId);
 
         episode.ToggleStatus();
         LastUpdate = DateTime.Now;
     }
-
-    public void Guard(string title, string description, string imageName, string slug)
+    void Guard(string title, string description, string imageName, string slug)
     {
         NullOrEmptyDomainDataException.CheckString(title, nameof(title));
         NullOrEmptyDomainDataException.CheckString(slug, nameof(slug));

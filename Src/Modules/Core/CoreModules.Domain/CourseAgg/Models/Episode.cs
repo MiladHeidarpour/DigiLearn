@@ -4,29 +4,31 @@ using Common.Domain.Utils;
 
 namespace CoreModule.Domain.CourseAgg.Models;
 
-public class Episode:BaseEntity
+public class Episode : BaseEntity
 {
-    public Episode(Guid token, string title, TimeSpan timeSpan, string videoName, string? attachmentName, bool isActive, Guid sectionId, string englishTitle)
+    public Episode(string? attachmentName, string videoName, TimeSpan timeSpan, Guid token, string title, bool isActive, Guid sectionId, string englishTitle)
     {
-        Guard(title,videoName,englishTitle);
-        Token = token;
-        Title = title;
-        TimeSpan = timeSpan;
-        VideoName = videoName;
-        AttachmentName = attachmentName;
+        Guard(videoName, englishTitle, title);
+
         IsActive = isActive;
         SectionId = sectionId;
         EnglishTitle = englishTitle;
+        AttachmentName = attachmentName;
+        VideoName = videoName;
+        TimeSpan = timeSpan;
+        Token = token;
+        Title = title;
     }
 
-    public Guid SectionId { get;private set; }
-    public Guid Token { get;private set; }
-    public string Title { get;private set; }
-    public string EnglishTitle { get;private set; }
-    public TimeSpan TimeSpan { get;private set; }
-    public string VideoName { get;private set; }
-    public string? AttachmentName { get;private set; }
-    public bool IsActive { get;private set; }
+    public string Title { get; private set; }
+    public string EnglishTitle { get; private set; }
+    public Guid SectionId { get; private set; }
+    public Guid Token { get; private set; }
+    public TimeSpan TimeSpan { get; private set; }
+    public string VideoName { get; private set; }
+    public string? AttachmentName { get; private set; }
+    public bool IsActive { get; private set; }
+
 
 
     public void ToggleStatus()
@@ -34,12 +36,11 @@ public class Episode:BaseEntity
         IsActive = !IsActive;
     }
 
-    void Guard( string title, string videoName, string englishTitle)
+    void Guard(string videoName, string englishTitle, string title)
     {
-        NullOrEmptyDomainDataException.CheckString(title,nameof(title));
-        NullOrEmptyDomainDataException.CheckString(videoName,nameof(videoName));
-        NullOrEmptyDomainDataException.CheckString(englishTitle,nameof(englishTitle));
-
+        NullOrEmptyDomainDataException.CheckString(videoName, nameof(videoName));
+        NullOrEmptyDomainDataException.CheckString(englishTitle, nameof(englishTitle));
+        NullOrEmptyDomainDataException.CheckString(title, nameof(title));
         if (englishTitle.IsUniCode())
         {
             throw new InvalidDomainDataException("Invalid EnglishTitle");

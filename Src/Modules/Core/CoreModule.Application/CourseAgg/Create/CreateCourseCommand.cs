@@ -58,8 +58,8 @@ class CreateCourseCommandHandle : IBaseCommandHandler<CreateCourseCommand>
         }
 
         var imageName = await _localFileService.SaveFileAndGenerateName(request.ImageFile, CoreModuleDirectories.CourseImage);
-        var course = new Course(request.TeacherId, request.Title, request.Description, imageName, videoPath, request.Price,
-            request.CourseLevel,request.CourseActionStatus, request.SeoData, request.CategoryId, request.SubCategoryId, request.Slug, _domainService)
+        var course = new Course(request.Title, request.TeacherId, request.Description, imageName, videoPath, request.Price,
+            request.SeoData, request.CourseLevel, request.CategoryId, request.SubCategoryId, request.Slug, request.CourseActionStatus, _domainService)
         {
             Id = courseId,
         };

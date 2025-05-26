@@ -31,6 +31,8 @@ jQuery.validator.addMethod("fileType",
     function (value, element, params) {
         var fileType = getExtension(value.toLowerCase());
         var acceptType = $(element).attr("fileType");
+        if (!fileType)
+            return true;
         if (fileType === acceptType)
             return true;
         else

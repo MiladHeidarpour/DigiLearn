@@ -1,4 +1,5 @@
-﻿using CoreModule.Application.CategoryAgg;
+﻿using AngleSharp;
+using CoreModule.Application.CategoryAgg;
 using CoreModule.Application.CategoryAgg.Create;
 using CoreModule.Application.CourseAgg;
 using CoreModule.Application.TeacherAgg;
@@ -12,6 +13,7 @@ using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
 
 namespace CoreModule.Config;
 
@@ -24,7 +26,7 @@ public static class CoreModuleBootstrapper
         CoreModuleQueryBootstrapper.RegisterDependency(services, config);
 
         services.AddMediatR(typeof(CreateCategoryCommand).Assembly);
-        services.AddValidatorsFromAssembly(typeof(CreateCategoryCommandValidator).Assembly);
+        services.AddValidatorsFromAssembly(typeof(CreateCategoryCommand).Assembly);
 
         services.AddScoped<ICourseDomainService, CourseDomainService>();
         services.AddScoped<ITeacherDomainService, TeacherDomainService>();
