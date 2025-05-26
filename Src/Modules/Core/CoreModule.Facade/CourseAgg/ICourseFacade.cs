@@ -1,6 +1,7 @@
 ﻿using Common.Application;
 using CoreModule.Application.CourseAgg.Create;
 using CoreModule.Application.CourseAgg.Edit;
+using CoreModule.Application.CourseAgg.Episodes.Add;
 using CoreModule.Application.CourseAgg.Sections.Add;
 using CoreModule.Query.CourseAgg._Dtos;
 using CoreModule.Query.CourseAgg.GetByFilter;
@@ -17,6 +18,7 @@ public interface ICourseFacade
     Task<CourseDto?> GetById(Guid id);
 
     Task<OperationResult> AddSection(AddCourseSectionCommand command);
+    Task<OperationResult> AddEpisode(AddCourseEpisodeCommand command);
 }
 
 public class CourseFacade : ICourseFacade
@@ -51,5 +53,10 @@ public class CourseFacade : ICourseFacade
     public async Task<OperationResult> AddSection(AddCourseSectionCommand command)
     {
         return await _mediator.Send(command);
+    }
+
+    public async Task<OperationResult> AddEpisode(AddCourseEpisodeCommand command)
+    {
+        return await _mediator.Send(command); 
     }
 }

@@ -8,10 +8,6 @@
 
   <ItemGroup>
     <Folder Include="CategoryAgg\Delete\" />
-    <Folder Include="CourseAgg\Episodes\Add\" />
-    <Folder Include="CourseAgg\Episodes\Edit\" />
-    <Folder Include="CourseAgg\Episodes\Accept\" />
-    <Folder Include="CourseAgg\Episodes\Delete\" />
     <Folder Include="CourseAgg\Sections\Edit\" />
     <Folder Include="CourseAgg\Sections\Delete\" />
   </ItemGroup>
