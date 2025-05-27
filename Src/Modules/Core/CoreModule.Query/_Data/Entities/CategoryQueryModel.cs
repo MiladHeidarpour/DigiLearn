@@ -11,5 +11,5 @@ class CategoryQueryModel : BaseEntity
     public Guid? ParentId { get; set; }
 
     [ForeignKey("ParentId")]
-    public List<CategoryQueryModel> Childs { get; set; } 
+    public List<CategoryQueryModel> Children { get; set; } 
 }
