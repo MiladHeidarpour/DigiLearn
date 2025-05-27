@@ -4,6 +4,7 @@ using CoreModule.Application.CategoryAgg.Create;
 using CoreModule.Application.CategoryAgg.Delete;
 using CoreModule.Application.CategoryAgg.Edit;
 using CoreModule.Query.CategoryAgg._Dtos;
+using CoreModule.Query.CategoryAgg.GetById;
 using CoreModule.Query.CategoryAgg.GetChildren;
 using CoreModule.Query.CategoryAgg.GetList;
 using MediatR;
@@ -14,8 +15,9 @@ public interface ICourseCategoryFacade
 {
     Task<OperationResult> Create(CreateCategoryCommand command);
     Task<OperationResult> Edit(EditCategoryCommand command);
-    Task<OperationResult> Delete(DeleteCategoryCommand command);
+    Task<OperationResult> Delete(Guid id);
     Task<OperationResult> AddChild(AddCategoryChildCommand command);
+    Task<CourseCategoryDto> GetById(Guid id);
     Task<List<CourseCategoryDto>> GetMainCategories();
     Task<List<CourseCategoryDto>> GetChildren(Guid parentId);
 }
@@ -39,14 +41,19 @@ public class CourseCategoryFacade : ICourseCategoryFacade
         return await _mediator.Send(command);
     }
 
-    public async Task<OperationResult> Delete(DeleteCategoryCommand command)
+    public async Task<OperationResult> Delete(Guid id)
     {
-        return await _mediator.Send(command);
+        return await _mediator.Send(new DeleteCategoryCommand(id));
     }
 
     public async Task<OperationResult> AddChild(AddCategoryChildCommand command)
     {
         return await _mediator.Send(command);
+    }
+
+    public async Task<CourseCategoryDto> GetById(Guid id)
+    {
+        return await _mediator.Send(new GetCourseCategoryByIdQuery(id));
     }
 
     public async Task<List<CourseCategoryDto>> GetMainCategories()

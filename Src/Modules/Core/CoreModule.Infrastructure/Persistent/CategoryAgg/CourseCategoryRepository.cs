@@ -1,7 +1,7 @@
 ﻿using Common.Infrastructure.Repository;
 using CoreModule.Domain.CategoryAgg.Models;
 using CoreModule.Domain.CategoryAgg.Repositories;
-using MongoDB.Driver.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace CoreModule.Infrastructure.Persistent.CategoryAgg;
 
@@ -14,13 +14,31 @@ public class CourseCategoryRepository : BaseRepository<CourseCategory, CoreModul
     public async Task Delete(CourseCategory category)
     {
         var categoryHasCourse = await Context.Courses.AnyAsync(f => f.CategoryId == category.Id || f.SubCategoryId == category.Id);
-        Context.Remove(category);
 
         if (categoryHasCourse is true)
         {
             throw new Exception("این دسته بندی دارای چندین دوره است");
         }
-        //ToDo Should Remove Child 
+
+        var children = await Context.Categories.Where(r => r.ParentId == category.Id).ToListAsync();
+
+        if (children.Any())
+        {
+            foreach (var item in children)
+            {
+                var isAnyCourse = await Context.Courses.AnyAsync(f => f.CategoryId == category.Id || f.SubCategoryId == category.Id);
+
+                if (isAnyCourse is true)
+                {
+                    throw new Exception("این دسته بندی دارای چندین دوره است");
+                }
+                else
+                {
+                    Context.Remove(item);
+                }
+            }
+        }
+        
         Context.Remove(category);
         await Context.SaveChangesAsync();
     }

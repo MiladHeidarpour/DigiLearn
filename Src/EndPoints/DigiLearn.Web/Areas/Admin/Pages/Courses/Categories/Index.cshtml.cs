@@ -1,3 +1,4 @@
+using CoreModule.Application.CategoryAgg.Delete;
 using CoreModule.Facade.CategoryAgg;
 using CoreModule.Query.CategoryAgg._Dtos;
 using DigiLearn.Web.Infrastructure.RazorUtils;
@@ -20,5 +21,10 @@ public class IndexModel : BaseRazor
     public async Task OnGet()
     {
         Categories = await _categoryFacade.GetMainCategories();
+    }
+
+    public async Task<IActionResult> OnPostDelete(Guid id)
+    {
+        return await AjaxTryCatch(async () => await _categoryFacade.Delete(id));
     }
 }

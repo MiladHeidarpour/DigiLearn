@@ -3,6 +3,7 @@ using CoreModule.Facade.CategoryAgg;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
+using CoreModule.Application.CategoryAgg.AddChild;
 using CoreModule.Application.CategoryAgg.Create;
 using DigiLearn.Web.Infrastructure.RazorUtils;
 
@@ -30,14 +31,29 @@ public class AddModel : BaseRazor
     {
     }
 
-    public async Task<IActionResult> OnPost()
+    public async Task<IActionResult> OnPost(Guid? parentId)
     {
-        var result = await _categoryFacade.Create(new CreateCategoryCommand
+        if (parentId != null)
         {
-            Title = Title,
-            Slug = Slug.ToSlug()
-        });
+            var result = await _categoryFacade.AddChild(new AddCategoryChildCommand()
+            {
+                ParentId = (Guid)parentId,
+                Title = Title,
+                Slug = Slug.ToSlug()
+            });
 
-        return RedirectAndShowAlert(result, RedirectToPage("Index"));
+            return RedirectAndShowAlert(result, RedirectToPage("Index"));
+        }
+        else
+        {
+            var result = await _categoryFacade.Create(new CreateCategoryCommand
+            {
+                Title = Title,
+                Slug = Slug.ToSlug()
+            });
+
+            return RedirectAndShowAlert(result, RedirectToPage("Index"));
+        }
+
     }
 }

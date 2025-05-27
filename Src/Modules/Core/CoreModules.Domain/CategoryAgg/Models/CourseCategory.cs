@@ -20,7 +20,7 @@ public class CourseCategory: AggregateRoot
         }
 
         Title = title;
-        Slug = slug;
+        Slug = slug.ToSlug();
         ParentId = parentId;
     }
 
@@ -40,7 +40,7 @@ public class CourseCategory: AggregateRoot
             }
         }
         Title = title;
-        Slug = slug;
+        Slug = slug.ToSlug();
     }
 
     void Guard(string title,string slug)
