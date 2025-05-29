@@ -1,5 +1,5 @@
-﻿@{
-    var selected = ViewData["selected"]?.ToString() ?? "";
+﻿﻿@{
+var selected = ViewData["selected"]?.ToString() ?? "";
 }
 <div class="main-menu menu-fixed menu-dark menu-accordion menu-shadow" data-scroll-to-active="true">
     <div class="navbar-header">
@@ -7,7 +7,7 @@
             <li class="nav-item mr-auto">
                 <a class="navbar-brand" href="/">
                     <div class="brand-logo"><img class="logo" src="/admin/images/logo/logo.png"></div>
-                    <h2 class="brand-text mb-0">DigiLearn</h2>
+                    <h2 class="brand-text mb-0">Digi Learn</h2>
                 </a>
             </li>
             <li class="nav-item nav-toggle"><a class="nav-link modern-nav-toggle pr-0" data-toggle="collapse"><i class="bx bx-x d-block d-xl-none font-medium-4 primary"></i><i class="toggle-icon bx bx-disc font-medium-4 d-none d-xl-block primary" data-ticon="bx-disc"></i></a></li>
@@ -16,7 +16,7 @@
     <div class="shadow-bottom"></div>
     <div class="main-menu-content">
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">
-            <li class="nav-item @(selected=="Index"?"active":null)">
+            <li class="nav-item @(selected == "index" ? "active" : null)">
                 <a href="/admin">
                     <i class="menu-livicon" data-icon="desktop"></i>
                     <span class="menu-title" data-i18n="File Manager">داشبورد</span>
@@ -29,13 +29,13 @@
                     <span class="menu-title" data-i18n="Dashboard">مدیریت دوره ها</span>
                 </a>
                 <ul class="menu-content">
-                    <li class="@(selected=="Products"?"active":null)">
+                    <li class="@(selected == "courses_index" ? "active" : null)">
                         <a href="/admin/courses">
                             <i class="bx bx-left-arrow-alt"></i>
                             <span class="menu-item" data-i18n="eCommerce">دوره ها</span>
                         </a>
                     </li>
-                    <li class="@(selected=="Categories"?"active":null)">
+                    <li class="@(selected == "courses_categories" ? "active" : null)">
                         <a href="/admin/courses/categories">
                             <i class="bx bx-left-arrow-alt"></i>
                             <span class="menu-item" data-i18n="Analytics">دسته بندی ها</span>
@@ -43,13 +43,13 @@
                     </li>
                 </ul>
             </li>
-            <li class="nav-item @(selected=="Orders"?"active":null)">
+            <li class="nav-item @(selected == "orders" ? "active" : null)">
                 <a href="/admin/orders">
                     <i class="menu-livicon" data-icon="box"></i>
                     <span class="menu-title" data-i18n="File Manager">مدیریت سفارشات</span>
                 </a>
             </li>
-            <li class="nav-item @(selected=="Banners"?"active":null)">
+            <li class="nav-item @(selected == "banners" ? "active" : null)">
                 <a href="/admin/banners">
                     <i class="menu-livicon" data-icon="box"></i>
                     <span class="menu-title" data-i18n="File Manager">مدیریت بنر ها</span>
@@ -61,13 +61,13 @@
                     <span class="menu-title" data-i18n="Dashboard">مدیریت کاربران</span>
                 </a>
                 <ul class="menu-content">
-                    <li class="@(selected=="Users"?"active":null)">
+                    <li class="@(selected == "users" ? "active" : null)">
                         <a href="/admin/users">
                             <i class="bx bx-left-arrow-alt"></i>
                             <span class="menu-item" data-i18n="eCommerce">لیست کاربران</span>
                         </a>
                     </li>
-                    <li class="@(selected=="Roles"?"active":null)">
+                    <li class="@(selected == "roles" ? "active" : null)">
                         <a href="/admin/roles">
                             <i class="bx bx-left-arrow-alt"></i>
                             <span class="menu-item" data-i18n="Analytics">نقش ها</span>
@@ -75,7 +75,7 @@
                     </li>
                 </ul>
             </li>
-            <li class="nav-item @(selected=="Sliders"?"active":null)">
+            <li class="nav-item @(selected == "sliders" ? "active" : null)">
                 <a href="/admin/sliders">
                     <i class="menu-livicon" data-icon="adjust"></i>
                     <span class="menu-title" data-i18n="File Manager">مدیریت  اسلایدر ها</span>
