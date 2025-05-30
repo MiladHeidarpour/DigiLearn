@@ -7,7 +7,7 @@
 }
 <h2>@ViewData["title"]</h2>
 <div class="collapsible">
-    @foreach (var item in Model.Course.Sections)
+    @foreach (var item in Model.Course.Sections.OrderBy(f=>f.DisplayOrder))
     {
         <div class="card collapse-header">
             <div id="c_@item.Id" class="card-header" data-toggle="collapse" role="button" data-target="#r_@item.Id" aria-controls="r_@item.Id" aria-expanded="false">
@@ -27,7 +27,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var episode in item.Episodes)
+                        @foreach (var episode in item.Episodes.OrderBy(f=>f.CreationDate))
                         {
                             <tr>
                                 <td>@counter</td>
@@ -44,6 +44,7 @@
                                     }
                                 </td>
                                 <td>
+                                    <a class="btn btn-primary" asp-page="EditEpisode" asp-route-episodeId="@episode.Id" asp-route-courseId="@item.CourseId">ویرایش</a>
                                     @if (episode.IsActive == false)
                                     {
                                         <Question url="@Url.Page("Index", "Accept", new { courseId = item.CourseId, episodeId = episode.Id })" class="btn btn-success btn-sm">تایید</Question>

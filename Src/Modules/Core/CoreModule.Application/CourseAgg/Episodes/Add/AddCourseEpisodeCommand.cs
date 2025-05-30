@@ -49,7 +49,7 @@ class AddCourseEpisodeCommandHandler:IBaseCommandHandler<AddCourseEpisodeCommand
             attExName = Path.GetExtension(request.AttachmentFile.FileName);
         }
 
-        var episode= course.AddEpisode(request.SectionId,attExName,Path.GetExtension(request.VideoFile.Name)
+        var episode= course.AddEpisode(request.SectionId,attExName,Path.GetExtension(request.VideoFile.FileName)
             ,request.TimeSpan, Guid.NewGuid(), request.Title,request.IsActive,request.EnglishTitle.ToSlug());
 
         await SaveFiles(request,episode);

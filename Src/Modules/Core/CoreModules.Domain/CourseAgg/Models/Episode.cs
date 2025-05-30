@@ -30,6 +30,18 @@ public class Episode : BaseEntity
     public bool IsActive { get; private set; }
 
 
+    public void Edit(string title, bool isActive, TimeSpan timeSpan, string? attachmentName)
+    {
+        NullOrEmptyDomainDataException.CheckString(title, nameof(title));
+        Title = title;
+        IsActive = isActive;
+        TimeSpan = timeSpan;
+        if (string.IsNullOrWhiteSpace(attachmentName) == false)
+        {
+            AttachmentName = attachmentName;
+        }
+    }
+
 
     public void ToggleStatus()
     {
