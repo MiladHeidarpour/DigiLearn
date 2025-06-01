@@ -45,6 +45,7 @@ class GetCourseByIdQueryHandler:IQueryHandler<GetCourseByIdQuery,CourseDto?>
             SeoData = course.SeoData,
             CourseLevel = course.CourseLevel,
             CourseStatus = course.CourseStatus,
+            ActionStatus = course.Status,
             Sections = course.Sections.Select(s => new CourseSectionDto()
             {
                 Title = s.Title,

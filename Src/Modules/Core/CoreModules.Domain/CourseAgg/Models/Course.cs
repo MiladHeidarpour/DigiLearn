@@ -59,7 +59,7 @@ public class Course : AggregateRoot
 
 
     public void Edit(string title, string description, string imageName, string? videoName, int price,
-        SeoData seoData, CourseLevel courseLevel, CourseStatus status, Guid categoryId, Guid subCategoryId, string slug, ICourseDomainService domainService)
+        SeoData seoData, CourseLevel courseLevel, CourseStatus status, Guid categoryId, Guid subCategoryId, string slug,CourseActionStatus actionStatus, ICourseDomainService domainService)
     {
         Guard(title, description, imageName, slug);
 
@@ -79,6 +79,7 @@ public class Course : AggregateRoot
         SubCategoryId = subCategoryId;
         Slug = slug;
         CourseStatus = status;
+        Status = actionStatus;
     }
     public void AddSection(int displayOrder, string title)
     {

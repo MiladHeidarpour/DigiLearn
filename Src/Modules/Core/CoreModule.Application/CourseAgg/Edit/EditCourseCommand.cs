@@ -27,21 +27,20 @@ public class EditCourseCommand : IBaseCommand
     public int Price { get; set; }
     public CourseLevel CourseLevel { get; set; }
     public CourseStatus CourseStatus { get; set; }
+    public CourseActionStatus CourseActionStatus { get; set; }
     public SeoData SeoData { get; set; }
 }
 
 public class EditCourseCommandHandler : IBaseCommandHandler<EditCourseCommand>
 {
-    private readonly IFtpFileService _ftpFileService;
     private readonly ILocalFileService _localFileService;
     private readonly ICourseRepository _repository;
     private readonly ICourseDomainService _domainService;
 
-    public EditCourseCommandHandler(ICourseRepository repository, ICourseDomainService domainService, IFtpFileService ftpFileService, ILocalFileService localFileService)
+    public EditCourseCommandHandler(ICourseRepository repository, ICourseDomainService domainService, ILocalFileService localFileService)
     {
         _repository = repository;
         _domainService = domainService;
-        _ftpFileService = ftpFileService;
         _localFileService = localFileService;
     }
 
@@ -65,7 +64,7 @@ public class EditCourseCommandHandler : IBaseCommandHandler<EditCourseCommand>
                 return OperationResult.Error("فایل وارد شده نامعتبر است");
             }
 
-            videoPath = await _ftpFileService.SaveFileAndGenerateName(request.VideoFile, CoreModuleDirectories.CourseDemo(course.Id));
+            videoPath = await _localFileService.SaveFileAndGenerateName(request.VideoFile, CoreModuleDirectories.CourseDemo(course.Id));
         }
         if (request.ImageFile is not null)
         {
@@ -79,19 +78,19 @@ public class EditCourseCommandHandler : IBaseCommandHandler<EditCourseCommand>
 
 
         course.Edit(request.Title, request.Description, imageName, videoPath, request.Price, request.SeoData, request.CourseLevel
-            , request.CourseStatus, request.CategoryId, request.SubCategoryId, request.Slug, _domainService);
+            , request.CourseStatus, request.CategoryId, request.SubCategoryId, request.Slug,request.CourseActionStatus, _domainService);
 
         await _repository.Save();
 
-        await DeleteOldFile(oldImageFileName, oldVideoFileName, request.VideoFile != null, request.ImageFile != null, course);
+        DeleteOldFile(oldImageFileName, oldVideoFileName, request.VideoFile != null, request.ImageFile != null, course);
         return OperationResult.Success();
     }
 
-    async Task DeleteOldFile(string image, string? video, bool isUploadNewVideo, bool isUploadNewImage, Course course)
+    void DeleteOldFile(string image, string? video, bool isUploadNewVideo, bool isUploadNewImage, Course course)
     {
         if (isUploadNewVideo && string.IsNullOrWhiteSpace(video) == false)
         {
-            await _ftpFileService.DeleteFile(CoreModuleDirectories.CourseDemo(course.Id), video);
+            _localFileService.DeleteFile(CoreModuleDirectories.CourseDemo(course.Id), video);
         }
 
         if (isUploadNewImage)
