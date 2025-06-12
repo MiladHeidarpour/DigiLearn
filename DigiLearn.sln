@@ -55,6 +55,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreModule.Facade", "Src\Mo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreModule.Config", "Src\Modules\Core\CoreModule.Config\CoreModule.Config.csproj", "{ED184A2A-AD32-4978-BEAD-3DC2B3DE20DB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.EventBus", "Src\Commons\Common.EventBus\Common.EventBus.csproj", "{06DB6ECF-247C-4448-9E6A-80E88D7F857A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -121,6 +123,10 @@ Global
 		{ED184A2A-AD32-4978-BEAD-3DC2B3DE20DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ED184A2A-AD32-4978-BEAD-3DC2B3DE20DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ED184A2A-AD32-4978-BEAD-3DC2B3DE20DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06DB6ECF-247C-4448-9E6A-80E88D7F857A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06DB6ECF-247C-4448-9E6A-80E88D7F857A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06DB6ECF-247C-4448-9E6A-80E88D7F857A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06DB6ECF-247C-4448-9E6A-80E88D7F857A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -148,6 +154,7 @@ Global
 		{32BF1383-6048-42F9-BA25-CDD550090E8E} = {918FCC8E-0DF8-42AA-A4CC-2599900E4DD9}
 		{BA6108AF-1A31-45DA-9249-73FAA4DFDF15} = {918FCC8E-0DF8-42AA-A4CC-2599900E4DD9}
 		{ED184A2A-AD32-4978-BEAD-3DC2B3DE20DB} = {918FCC8E-0DF8-42AA-A4CC-2599900E4DD9}
+		{06DB6ECF-247C-4448-9E6A-80E88D7F857A} = {0D36B1EF-3666-4518-AE4B-A4AB4E861302}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7F7ED1B9-3A41-4505-9D51-14C1ED449486}

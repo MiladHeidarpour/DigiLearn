@@ -17,7 +17,8 @@ builder.Services.AddTransient<TeacherActionFilter>();
 builder.Services
     .InitUserModule(builder.Configuration)
     .InitTicketModule(builder.Configuration)
-    .InitCoreModule(builder.Configuration);
+    .InitCoreModule(builder.Configuration)
+    .RegisterWebDependencies();
 
 builder.Services.AddJwtAuthentication(builder.Configuration);
 
