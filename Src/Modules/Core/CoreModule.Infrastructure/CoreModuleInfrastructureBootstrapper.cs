@@ -21,6 +21,7 @@ public class CoreModuleInfrastructureBootstrapper
         services.AddScoped<ICourseCategoryRepository, CourseCategoryRepository>();
 
         services.AddHostedService<UserRegisteredEventHandler>();
+        services.AddHostedService<UserEditedEventHandler>();
 
         services.AddDbContext<CoreModuleEFContext>(option =>
         {

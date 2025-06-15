@@ -41,6 +41,7 @@ public class EditUserCommandHandler : IBaseCommandHandler<EditUserCommand>
             Email = user.Email,
             Name = user.Name,
             Family = user.Family,
+            PhoneNumber= user.PhoneNumber,
         }, null, Exchanges.UserTopicExchange, ExchangeType.Topic, "user.edited");
 
         return OperationResult.Success();
