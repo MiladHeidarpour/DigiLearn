@@ -40,7 +40,7 @@
                             <tr>
                                 <td>
                                     <p><b>@item.Title</b></p>
-                                    <p> @item.Text</p>
+                                    <p>@Html.Raw(item.Text)</p>
                                 </td>
                                 <td>
                                     <span class="badge @(item.IsSeen is true ? "badge-success" : "badge-danger")">

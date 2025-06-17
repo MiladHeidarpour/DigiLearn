@@ -3,6 +3,7 @@ using Common.EventBus.Abstractions;
 using Common.EventBus.Events;
 using CoreModule.Infrastructure.Persistent;
 using CoreModule.Infrastructure.Persistent.UserAgg;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -12,14 +13,14 @@ using RabbitMQ.Client.Events;
 
 namespace CoreModule.Infrastructure.EventHandlers;
 
-public class UserRegisteredEventHandler : BackgroundService
+public class UserEditedEventHandler : BackgroundService
 {
     private readonly IEventBus _eventBus;
-    private readonly string _queueName = "coreModuleUserRegistered";
-    private readonly ILogger<UserRegisteredEventHandler> _logger;
+    private readonly string _queueName = "coreModuleUserEdited";
+    private readonly ILogger<UserEditedEventHandler> _logger;
     private readonly IServiceScopeFactory _serviceFactory;
 
-    public UserRegisteredEventHandler(IEventBus eventBus, ILogger<UserRegisteredEventHandler> logger, IServiceScopeFactory serviceFactory)
+    public UserEditedEventHandler(IEventBus eventBus, ILogger<UserEditedEventHandler> logger, IServiceScopeFactory serviceFactory)
     {
         _eventBus = eventBus;
         _logger = logger;
@@ -37,7 +38,7 @@ public class UserRegisteredEventHandler : BackgroundService
 
         model.ExchangeDeclare(Exchanges.UserTopicExchange, ExchangeType.Topic, true, false, null);
         model.QueueDeclare(_queueName, true, false, false, null);
-        model.QueueBind(_queueName, Exchanges.UserTopicExchange, "user.registered", null);
+        model.QueueBind(_queueName, Exchanges.UserTopicExchange, "user.edited", null);
 
         var consumer = new EventingBasicConsumer(model);
         consumer.Received += async (sender, args) =>
@@ -45,17 +46,30 @@ public class UserRegisteredEventHandler : BackgroundService
             try
             {
                 var userJson = Encoding.UTF8.GetString(args.Body.ToArray());
-                var user = JsonConvert.DeserializeObject<UserRegistered>(userJson);
-                context.Users.Add(new User
+                var user = JsonConvert.DeserializeObject<UserEdited>(userJson);
+                var oldUser = await context.Users.FirstOrDefaultAsync(f => f.Id == user.UserId, stoppingToken);
+
+                if (oldUser == null)
                 {
-                    Id = user.Id,
-                    CreationDate = user.CreationDate,
-                    PhoneNumber = user.PhoneNumber,
-                    Name = user.Name,
-                    Family = user.Family,
-                    Email = user.Email,
-                    Avatar = user.Avatar
-                });
+                    context.Users.Add(new User()
+                    {
+                        Id = user.UserId,
+                        Avatar = "Default.png",
+                        CreationDate = user.CreationDate,
+                        Email = user.Email,
+                        Name = user.Name,
+                        Family = user.Family,
+                        PhoneNumber = user.PhoneNumber
+                    });
+                }
+                else
+                {
+                    oldUser.Name=user.Name;
+                    oldUser.Family=user.Family;
+                    oldUser.PhoneNumber=user.PhoneNumber;
+                    oldUser.Email=user.Email;
+                    context.Users.Update(oldUser);
+                }
 
                 await context.SaveChangesAsync(stoppingToken);
                 model.BasicAck(args.DeliveryTag, false);

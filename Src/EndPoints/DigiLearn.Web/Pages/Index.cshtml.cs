@@ -19,10 +19,6 @@ public class IndexModel : PageModel
 
     public void OnGet()
     {
-        _eventBus.Publish(new UserRegistered()
-        {
-            PhoneNumber = "09111111111",
-            Email = "test@test.com"
-        },"test");
+
     }
 }

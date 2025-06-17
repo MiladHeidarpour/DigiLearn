@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using UserModule.Core.Commands.Users.Register;
+using UserModule.Core.EventHandlers;
 using UserModule.Core.Services;
 using UserModule.Data;
 
@@ -23,6 +24,8 @@ public static class UserBootstrapper
         services.AddScoped<INotificationFacade, NotificationFacade>();
         services.AddValidatorsFromAssembly(typeof(RegisterUserCommandValidator).Assembly);
         services.AddAutoMapper(typeof(MapperProfile).Assembly);
+
+        services.AddHostedService<NotificationEventHandler>();
 
         return services;
     }

@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Commons\Common.Application\Common.Application.csproj" />
+    <ProjectReference Include="..\..\..\Commons\Common.EventBus\Common.EventBus.csproj" />
     <ProjectReference Include="..\CoreModules.Domain\CoreModule.Domain.csproj" />
   </ItemGroup>
 
