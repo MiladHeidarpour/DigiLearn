@@ -2,6 +2,7 @@
 using Common.EventBus.RabbitMQ;
 using DigiLearn.Web.Infrastructure.JwtUtil;
 using DigiLearn.Web.Infrastructure.RazorUtils;
+using DigiLearn.Web.Infrastructure.Services;
 
 namespace DigiLearn.Web.Infrastructure;
 
@@ -13,10 +14,11 @@ public static class RegisterDependencyServices
 
         services.AddScoped<HttpClientAuthorizationDelegatingHandler>();
         services.AddTransient<IRenderViewToString, RenderViewToString>();
-
-        services.AddAutoMapper(typeof(RegisterDependencyServices).Assembly);
+        services.AddScoped<IHomePageService, HomePageService>();
 
         services.AddSingleton<IEventBus, EventBusRabbitMQ>();
+
+        services.AddAutoMapper(typeof(RegisterDependencyServices).Assembly);
 
         return services;
     }
