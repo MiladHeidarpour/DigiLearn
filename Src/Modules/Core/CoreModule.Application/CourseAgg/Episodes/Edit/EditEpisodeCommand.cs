@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace CoreModule.Application.CourseAgg.Episodes.Edit;
 
-public class EditEpisodeCommand:IBaseCommand
+public class EditEpisodeCommand : IBaseCommand
 {
     public Guid Id { get; set; }
     public Guid CourseId { get; set; }
@@ -19,6 +19,7 @@ public class EditEpisodeCommand:IBaseCommand
     public IFormFile? VideoFile { get; set; }
     public IFormFile? AttachmentFile { get; set; }
     public bool IsActive { get; set; }
+    public bool IsFree { get; set; }
 }
 
 class EditEpisodeCommandHandler : IBaseCommandHandler<EditEpisodeCommand>
@@ -56,7 +57,7 @@ class EditEpisodeCommandHandler : IBaseCommandHandler<EditEpisodeCommand>
         {
             await SaveVideoFile(request.VideoFile, episode, course.Id);
         }
-        course.EditEpisode(request.Id, request.SectionId, request.Title, request.IsActive, request.TimeSpan, attname);
+        course.EditEpisode(request.Id, request.SectionId, request.Title, request.IsFree, request.IsActive, request.TimeSpan, attname);
         await _repository.Save();
         return OperationResult.Success();
     }

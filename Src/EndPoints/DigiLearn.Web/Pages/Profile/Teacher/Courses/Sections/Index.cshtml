@@ -36,6 +36,7 @@
                                         <th>عنوان</th>
                                         <th>زمان</th>
                                         <th>وضعیت</th>
+                                        <th>رایگان</th>
                                         <th>عملیات</th>
                                     </tr>
                                     </thead>
@@ -55,6 +56,16 @@
                                                 {
                                                     <label>غیر فعال</label>
 
+                                                }
+                                            </td>
+                                            <td>
+                                                @if (episode.IsFree)
+                                                {
+                                                    <i class="fa fa-check text-success"></i>
+                                                }
+                                                else
+                                                {
+                                                    <i class="fa fa-close text-danger"></i>
                                                 }
                                             </td>
                                             <td></td>

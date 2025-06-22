@@ -10,6 +10,7 @@ using CoreModule.Query.CourseAgg._Dtos;
 using CoreModule.Query.CourseAgg.Episodes.GetById;
 using CoreModule.Query.CourseAgg.GetByFilter;
 using CoreModule.Query.CourseAgg.GetById;
+using CoreModule.Query.CourseAgg.GetBySlug;
 using MediatR;
 
 namespace CoreModule.Facade.CourseAgg;
@@ -20,6 +21,7 @@ public interface ICourseFacade
     Task<OperationResult> Edit(EditCourseCommand command);
     Task<CourseFilterResult> GetByFilter(CourseFilterParams filterParams);
     Task<CourseDto?> GetById(Guid id);
+    Task<CourseDto?> GetBySlug(string slug);
     Task<EpisodeDto?> GetEpisodeById(Guid id);
 
     Task<OperationResult> AddSection(AddCourseSectionCommand command);
@@ -58,6 +60,11 @@ public class CourseFacade : ICourseFacade
         return await _mediator.Send(new GetCourseByIdQuery(id));
     }
 
+    public async Task<CourseDto?> GetBySlug(string slug)
+    {
+        return await _mediator.Send(new GetCourseBySlugQuery(slug));
+    }
+
     public async Task<EpisodeDto?> GetEpisodeById(Guid id)
     {
         return await _mediator.Send(new GetEpisodeByIdQuery(id));
@@ -70,7 +77,7 @@ public class CourseFacade : ICourseFacade
 
     public async Task<OperationResult> AddEpisode(AddCourseEpisodeCommand command)
     {
-        return await _mediator.Send(command); 
+        return await _mediator.Send(command);
     }
 
     public async Task<OperationResult> EditEpisode(EditEpisodeCommand command)

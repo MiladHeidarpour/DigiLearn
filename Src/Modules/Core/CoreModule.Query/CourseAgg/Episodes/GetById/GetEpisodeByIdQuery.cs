@@ -35,7 +35,8 @@ class GetEpisodeByIdQueryHandler : IQueryHandler<GetEpisodeByIdQuery, EpisodeDto
             TimeSpan = episode.TimeSpan,
             VideoName = episode.VideoName,
             AttachmentName = episode.AttachmentName,
-            IsActive = episode.IsActive
+            IsActive = episode.IsActive,
+            IsFree = episode.IsFree,
         };
     }
 }

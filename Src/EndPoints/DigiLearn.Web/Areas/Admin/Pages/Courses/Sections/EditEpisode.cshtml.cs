@@ -46,6 +46,10 @@ public class EditEpisodeModel : BaseRazor
 
     public bool IsActive { get; set; }
 
+    [BindProperty]
+    [Display(Name = "قسمت رایگان")]
+    public bool IsFree { get; set; }
+
     public string? VideoFileName { get; set; }
 
     public Guid? CourseId { get; set; }
@@ -64,6 +68,7 @@ public class EditEpisodeModel : BaseRazor
         Time = episode.TimeSpan;
         EpisodeDto = episode;
         CourseId = courseId;
+        IsFree = episode.IsFree;
         return Page();
     }
 
@@ -81,7 +86,8 @@ public class EditEpisodeModel : BaseRazor
             IsActive = IsActive,
             Id = episodeId,
             VideoFile = VideoFile,
-            TimeSpan = Time
+            TimeSpan = Time,
+            IsFree = IsFree,
         });
         return RedirectAndShowAlert(result, RedirectToPage("Index", new { courseId }));
     }

@@ -15,6 +15,7 @@
     @await RenderSectionAsync("Meta", false)
 </head>
 
+
 <body>
     <div class="overlay"></div>
     <partial name="Header/_MobileMenu" />
@@ -22,7 +23,7 @@
     <header>
         <partial name="Header/_TopNav" />
         @await RenderSectionAsync("MiddleHeader", required: false)
-        <partial name="Header/_MainMenu" />
+        <partial name="Header/_MainMenu"/>
     </header>
     @RenderBody()
     <partial name="_Footer"/>

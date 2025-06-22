@@ -2,7 +2,10 @@
 @{
     var id = Guid.NewGuid();
 }
-<div class="custom-control custom-switch custom-switch-success mr-2 mb-1">
-    <label  asp-for="@Model" class="mb-0 d-block"></label>
-    <input type="checkbox" class="custom-control-input" asp-for="@Model">
-</div>
+
+<fieldset>
+    <div class="checkbox">
+        <input type="checkbox" class="checkbox-input" asp-for="@Model"/>
+        <label asp-for="@Model"></label>
+    </div>
+</fieldset>

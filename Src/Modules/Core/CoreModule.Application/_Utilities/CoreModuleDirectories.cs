@@ -8,6 +8,9 @@ public class CoreModuleDirectories
     public static string CourseEpisode(Guid courseId,Guid episodeToken) => $"wwwroot/core/course/{courseId}/episodes/{episodeToken}";
     public static string GetCourseImage(string imageName) => $"{CourseImage.Replace("wwwroot","")}/{imageName}";
     public static string GetCvFile(string fileName) => $"{CvFileName.Replace("wwwroot","")}/{fileName}";
-    public static string GetEpisodeFile(Guid courseId, Guid episodeToke, string fileName)
-        => $"{CourseEpisode(courseId, episodeToke).Replace("wwwroot", "")}/{fileName}";
+    public static string GetEpisodeFile(Guid courseId, Guid episodeToken, string fileName)
+        => $"{CourseEpisode(courseId, episodeToken).Replace("wwwroot", "")}/{fileName}";
+
+    public static string GetCourseDemo(Guid courseId, string fileName)
+        => $"{CourseDemo(courseId).Replace("wwwroot", "")}/{fileName}";
 }

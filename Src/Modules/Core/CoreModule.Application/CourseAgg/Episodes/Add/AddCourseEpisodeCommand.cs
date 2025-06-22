@@ -20,6 +20,7 @@ public class AddCourseEpisodeCommand:IBaseCommand
     public IFormFile VideoFile { get; set; }
     public IFormFile? AttachmentFile { get; set; }
     public bool IsActive { get; set; }
+    public bool IsFree { get; set; }
 }
 
 class AddCourseEpisodeCommandHandler:IBaseCommandHandler<AddCourseEpisodeCommand>
@@ -50,7 +51,7 @@ class AddCourseEpisodeCommandHandler:IBaseCommandHandler<AddCourseEpisodeCommand
         }
 
         var episode= course.AddEpisode(request.SectionId,attExName,Path.GetExtension(request.VideoFile.FileName)
-            ,request.TimeSpan, Guid.NewGuid(), request.Title,request.IsActive,request.EnglishTitle.ToSlug());
+            ,request.TimeSpan, Guid.NewGuid(), request.Title,request.IsFree,request.IsActive,request.EnglishTitle.ToSlug());
 
         await SaveFiles(request,episode);
         await _repository.Save();

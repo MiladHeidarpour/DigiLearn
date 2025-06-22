@@ -59,7 +59,7 @@ public class Course : AggregateRoot
 
 
     public void Edit(string title, string description, string imageName, string? videoName, int price,
-        SeoData seoData, CourseLevel courseLevel, CourseStatus status, Guid categoryId, Guid subCategoryId, string slug,CourseActionStatus actionStatus, ICourseDomainService domainService)
+        SeoData seoData, CourseLevel courseLevel, CourseStatus status, Guid categoryId, Guid subCategoryId, string slug, CourseActionStatus actionStatus, ICourseDomainService domainService)
     {
         Guard(title, description, imageName, slug);
 
@@ -102,7 +102,7 @@ public class Course : AggregateRoot
 
         Sections.Remove(section);
     }
-    public Episode AddEpisode(Guid sectionId, string? attachmentExtension, string videoExtension, TimeSpan timeSpan, Guid token, string title, bool isActive, string englishTitle)
+    public Episode AddEpisode(Guid sectionId, string? attachmentExtension, string videoExtension, TimeSpan timeSpan, Guid token, string title, bool isFree, bool isActive, string englishTitle)
     {
 
         var section = Sections.FirstOrDefault(f => f.Id == sectionId);
@@ -125,10 +125,10 @@ public class Course : AggregateRoot
                 CourseStatus = CourseStatus.InProgress;
             }
         }
-        return section.AddEpisode(attName, vidName, timeSpan, token, title, isActive, englishTitle);
+        return section.AddEpisode(attName, vidName, timeSpan, token, title, isFree, isActive, englishTitle);
     }
 
-    public void EditEpisode(Guid episodeId, Guid sectionId, string title, bool isActive, TimeSpan timeSpan, string? attachmentName)
+    public void EditEpisode(Guid episodeId, Guid sectionId, string title,bool isFree, bool isActive, TimeSpan timeSpan, string? attachmentName)
     {
         var section = Sections.FirstOrDefault(f => f.Id == sectionId);
         if (section == null) throw new InvalidDomainDataException("Section NotFound");
@@ -136,7 +136,7 @@ public class Course : AggregateRoot
         var episode = section.Episodes.FirstOrDefault(f => f.Id == episodeId);
         if (episode == null) throw new InvalidDomainDataException("episode NotFound");
 
-        episode.Edit(title, isActive, timeSpan, attachmentName);
+        episode.Edit(title, isActive, timeSpan, attachmentName,isFree);
     }
     public void AcceptEpisode(Guid episodeId)
     {

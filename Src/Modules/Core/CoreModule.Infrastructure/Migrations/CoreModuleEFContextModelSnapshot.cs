@@ -286,6 +286,9 @@ namespace CoreModule.Infrastructure.Migrations
                                     b2.Property<bool>("IsActive")
                                         .HasColumnType("bit");
 
+                                    b2.Property<bool>("IsFree")
+                                        .HasColumnType("bit");
+
                                     b2.Property<TimeSpan>("TimeSpan")
                                         .HasColumnType("time");
 

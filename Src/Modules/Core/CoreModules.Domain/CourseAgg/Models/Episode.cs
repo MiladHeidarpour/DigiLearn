@@ -6,13 +6,14 @@ namespace CoreModule.Domain.CourseAgg.Models;
 
 public class Episode : BaseEntity
 {
-    public Episode(string? attachmentName, string videoName, TimeSpan timeSpan, Guid token, string title, bool isActive, Guid sectionId, string englishTitle)
+    public Episode(string? attachmentName, string videoName, TimeSpan timeSpan, Guid token, string title, bool isActive, bool isFree, Guid sectionId, string englishTitle)
     {
         Guard(videoName, englishTitle, title);
 
         IsActive = isActive;
         SectionId = sectionId;
         EnglishTitle = englishTitle;
+        IsFree = isFree;
         AttachmentName = attachmentName;
         VideoName = videoName;
         TimeSpan = timeSpan;
@@ -28,14 +29,16 @@ public class Episode : BaseEntity
     public string VideoName { get; private set; }
     public string? AttachmentName { get; private set; }
     public bool IsActive { get; private set; }
+    public bool IsFree { get; private set; }
 
 
-    public void Edit(string title, bool isActive, TimeSpan timeSpan, string? attachmentName)
+    public void Edit(string title, bool isActive, TimeSpan timeSpan, string? attachmentName,bool isFree)
     {
         NullOrEmptyDomainDataException.CheckString(title, nameof(title));
         Title = title;
         IsActive = isActive;
         TimeSpan = timeSpan;
+        IsFree = isFree;
         if (string.IsNullOrWhiteSpace(attachmentName) == false)
         {
             AttachmentName = attachmentName;

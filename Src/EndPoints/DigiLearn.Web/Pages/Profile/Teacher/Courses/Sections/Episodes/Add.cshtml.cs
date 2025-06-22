@@ -43,7 +43,8 @@ public class AddModel : BaseRazor
     [FileType("rar", ErrorMessage = "فایل ضمیمه نامعتبر است")]
     public IFormFile? AttachmentFile { get; set; }
 
-
+    [Display(Name = "قسمت رایگان")]
+    public bool IsFree { get; set; }
     public void OnGet()
     {
     }
@@ -59,7 +60,8 @@ public class AddModel : BaseRazor
             CourseId = courseId,
             EnglishTitle = EnglishTitle,
             TimeSpan = TimeSpan,
-            SectionId = sectionId
+            SectionId = sectionId,
+            IsFree = IsFree
         });
         return RedirectAndShowAlert(result, RedirectToPage("../Index", new { courseId }));
     }
