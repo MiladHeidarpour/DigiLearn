@@ -1,6 +1,6 @@
 ﻿namespace BlogModule.Services.Dtos.Commands;
 
-public class CreateCategoryCommand
+public class CreateBlogCategoryCommand
 {
     public string Title { get; set; }
     public string Slug { get; set; }

@@ -10,8 +10,8 @@ public class MapperProfile : Profile
     public MapperProfile()
     {
         CreateMap<Category, BlogCategoryDto>().ReverseMap();
-        CreateMap<Category, CreateCategoryCommand>().ReverseMap();
-        CreateMap<Category, EditCategoryCommand>().ReverseMap();
+        CreateMap<Category, CreateBlogCategoryCommand>().ReverseMap();
+        CreateMap<Category, EditBlogCategoryCommand>().ReverseMap();
 
         CreateMap<BlogPostDto, Post>().ReverseMap();
         CreateMap<CreatePostCommand, Post>().ReverseMap();

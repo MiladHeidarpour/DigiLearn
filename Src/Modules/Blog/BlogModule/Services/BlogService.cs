@@ -26,7 +26,7 @@ class BlogService : IBlogService
         _localFileService = localFileService;
     }
 
-    public async Task<OperationResult> CreateCategory(CreateCategoryCommand command)
+    public async Task<OperationResult> CreateCategory(CreateBlogCategoryCommand command)
     {
         var category = _mapper.Map<Category>(command);
 
@@ -38,7 +38,7 @@ class BlogService : IBlogService
         return OperationResult.Success();
     }
 
-    public async Task<OperationResult> EditCategory(EditCategoryCommand command)
+    public async Task<OperationResult> EditCategory(EditBlogCategoryCommand command)
     {
         var category = await _categoryRepository.GetAsync(command.Id);
 
@@ -47,7 +47,7 @@ class BlogService : IBlogService
 
 
         if (command.Slug != category.Slug &&
-            await _categoryRepository.ExistsAsync(f => f.Slug == category.Slug))
+            await _categoryRepository.ExistsAsync(f => f.Slug == command.Slug))
         {
             return OperationResult.Error("اسلاگ تکراری است");
         }

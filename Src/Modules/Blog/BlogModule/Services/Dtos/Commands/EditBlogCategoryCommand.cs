@@ -1,6 +1,6 @@
 ﻿namespace BlogModule.Services.Dtos.Commands;
 
-public class EditCategoryCommand
+public class EditBlogCategoryCommand
 {
     public Guid Id { get; set; }
     public string Title { get; set; }
