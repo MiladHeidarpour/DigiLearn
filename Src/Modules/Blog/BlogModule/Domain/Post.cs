@@ -23,4 +23,7 @@ class Post : BaseEntity
     [MaxLength(110)]
     public string ImageName { get; set; }
     public Guid CategoryId { get; set; }
+
+    [ForeignKey("CategoryId")]
+    public Category Category { get; set; }
 }

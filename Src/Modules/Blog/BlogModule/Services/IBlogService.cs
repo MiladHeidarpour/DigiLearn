@@ -25,4 +25,5 @@ public interface IBlogService
     //Post Query
 
     Task<BlogPostDto?> GetPostById(Guid postId);
+    Task<BlogPostFilterResult> GetPostByFilter(BlogPostFilterParams filterParams);
 }

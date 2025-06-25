@@ -18,6 +18,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\..\Commons\Common.Infrastructure\Common.Infrastructure.csproj" />
+		<ProjectReference Include="..\..\..\Commons\Common.Query\Common.Query.csproj" />
 	</ItemGroup>
 
 </Project>

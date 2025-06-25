@@ -41,3 +41,8 @@ public class BaseFilter<TData,TParam>:BaseFilter where TParam:BaseFilterParam wh
     public List<TData> Data { get; set; }
     public TParam FilterParams { get; set; }
 }
+//public class BaseFilter<TData> : BaseFilter
+//    where TData : class
+//{
+//    public List<TData> Data { get; set; }
+//}
