@@ -105,7 +105,7 @@ class BlogService : IBlogService
             return OperationResult.NotFound("اطلاعات یافت نشد");
 
         if (command.Slug != post.Slug &&
-            await _postRepository.ExistsAsync(f => f.Slug == post.Slug))
+            await _postRepository.ExistsAsync(f => f.Slug == command.Slug))
         {
             return OperationResult.Error("اسلاگ تکراری است");
         }
@@ -127,7 +127,6 @@ class BlogService : IBlogService
         post.OwnerName=command.OwnerName;
         post.Title = command.Title;
         post.CategoryId = command.CategoryId;
-        post.UserId = command.UserId;
         post.Slug = command.Slug;
 
         await _postRepository.Save();
