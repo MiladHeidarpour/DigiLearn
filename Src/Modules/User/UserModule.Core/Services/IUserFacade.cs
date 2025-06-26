@@ -12,4 +12,5 @@ public interface IUserFacade
     Task<OperationResult> EditUserProfile(EditUserCommand command);
     Task<OperationResult> ChangePassword(ChangeUserPasswordCommand command);
     Task<UserDto?> GetUserByPhoneNumber(string phoneNumber);
+    Task<UserDto?> GetUserById(Guid id);
 }

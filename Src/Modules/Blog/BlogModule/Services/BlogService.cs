@@ -88,7 +88,7 @@ class BlogService : IBlogService
             return OperationResult.Error("عکس وارد شده نامعتبر است");
 
         var imageName = await _localFileService.SaveFileAndGenerateName(command.ImageFile, BlogDirectory.PostImage);
-        post.ImageName=imageName;
+        post.ImageName = imageName;
         post.Visit = 1;
         post.Description = command.Description.SanitizeText();
 
@@ -110,7 +110,7 @@ class BlogService : IBlogService
             return OperationResult.Error("اسلاگ تکراری است");
         }
 
-        if (command.ImageFile !=null)
+        if (command.ImageFile != null)
         {
             if (command.ImageFile.IsImage() == false)
             {
@@ -119,19 +119,19 @@ class BlogService : IBlogService
             else
             {
                 var imageName = await _localFileService.SaveFileAndGenerateName(command.ImageFile, BlogDirectory.PostImage);
-                post.ImageName= imageName;
+                post.ImageName = imageName;
             }
         }
 
         post.Description = command.Description.SanitizeText();
-        post.OwnerName=command.OwnerName;
+        post.OwnerName = command.OwnerName;
         post.Title = command.Title;
         post.CategoryId = command.CategoryId;
         post.Slug = command.Slug;
 
         await _postRepository.Save();
         return OperationResult.Success();
-        
+
     }
 
     public async Task<OperationResult> DeletePost(Guid postId)
@@ -143,8 +143,19 @@ class BlogService : IBlogService
 
         _postRepository.Delete(post);
         await _postRepository.Save();
-        _localFileService.DeleteFile(BlogDirectory.PostImage,post.ImageName);
+        _localFileService.DeleteFile(BlogDirectory.PostImage, post.ImageName);
         return OperationResult.Success();
+    }
+
+    public async Task AddPostVisit(Guid id)
+    {
+        var post = await _postRepository.GetAsync(id);
+        if (post is not null)
+        {
+            post.Visit += 1;
+            _postRepository.Update(post);
+            await _context.SaveChangesAsync();
+        }
     }
 
     public async Task<List<BlogCategoryDto>> GetAllCategories()
@@ -168,18 +179,45 @@ class BlogService : IBlogService
         return _mapper.Map<BlogPostDto>(post);
     }
 
+    public async Task<BlogPostFilterItemDto?> GetPostBySlug(string slug)
+    {
+        var post = await _context.Posts.Include(c => c.Category).FirstOrDefaultAsync(f => f.Slug == slug);
+        if (post is null)
+            return null;
+
+        return new BlogPostFilterItemDto
+        {
+            CreationDate = post.CreationDate,
+            Id = post.Id,
+            UserId = post.UserId,
+            Title = post.Title,
+            OwnerName = post.OwnerName,
+            Description = post.Description,
+            Slug = post.Slug,
+            Visit = post.Visit,
+            ImageName = post.ImageName,
+            Category = new BlogCategoryDto
+            {
+                Id = post.Category.Id,
+                Title = post.Category.Title,
+                Slug = post.Category.Slug,
+                CreationDate = post.Category.CreationDate
+            }
+        };
+    }
+
     public async Task<BlogPostFilterResult> GetPostByFilter(BlogPostFilterParams filterParams)
     {
-        var result =  _context.Posts.OrderByDescending(f=>f.CreationDate)
-            .Include(c=>c.Category).AsQueryable();
+        var result = _context.Posts.OrderByDescending(f => f.CreationDate)
+            .Include(c => c.Category).AsQueryable();
 
-        if (string.IsNullOrWhiteSpace(filterParams.Search)==false)
+        if (string.IsNullOrWhiteSpace(filterParams.Search) == false)
         {
             result = result.Where(r =>
                 r.Title.Contains(filterParams.Search) || r.Description.Contains(filterParams.Search));
         }
 
-        if (string.IsNullOrWhiteSpace(filterParams.CategorySlug)==false)
+        if (string.IsNullOrWhiteSpace(filterParams.CategorySlug) == false)
         {
             result = result.Where(r => r.Category.Slug == filterParams.CategorySlug);
         }
@@ -187,16 +225,16 @@ class BlogService : IBlogService
         var skip = (filterParams.PageId - 1) * filterParams.Take;
         var model = new BlogPostFilterResult()
         {
-            Data =await result.Skip(skip).Take(filterParams.Take).Select(s=>new BlogPostFilterItemDto
+            Data = await result.Skip(skip).Take(filterParams.Take).Select(s => new BlogPostFilterItemDto
             {
                 CreationDate = s.CreationDate,
                 Id = s.Id,
                 UserId = s.UserId,
                 Title = s.Title,
-                OwnerName =s.OwnerName,
+                OwnerName = s.OwnerName,
                 Description = s.Description,
-                Slug =s.Slug,
-                Visit = 0,
+                Slug = s.Slug,
+                Visit = s.Visit,
                 ImageName = s.ImageName,
                 Category = new BlogCategoryDto
                 {
@@ -207,7 +245,7 @@ class BlogService : IBlogService
                 }
             }).ToListAsync()
         };
-        model.GeneratePaging(result,filterParams.Take,filterParams.PageId);
+        model.GeneratePaging(result, filterParams.Take, filterParams.PageId);
         return model;
     }
 }

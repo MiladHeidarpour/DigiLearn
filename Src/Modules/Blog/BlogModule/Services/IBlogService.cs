@@ -16,6 +16,7 @@ public interface IBlogService
     Task<OperationResult> CreatePost(CreatePostCommand command);
     Task<OperationResult> EditPost(EditPostCommand command);
     Task<OperationResult> DeletePost(Guid postId);
+    Task AddPostVisit(Guid id);
 
 
     //Category Query
@@ -25,5 +26,6 @@ public interface IBlogService
     //Post Query
 
     Task<BlogPostDto?> GetPostById(Guid postId);
+    Task<BlogPostFilterItemDto?> GetPostBySlug(string slug);
     Task<BlogPostFilterResult> GetPostByFilter(BlogPostFilterParams filterParams);
 }

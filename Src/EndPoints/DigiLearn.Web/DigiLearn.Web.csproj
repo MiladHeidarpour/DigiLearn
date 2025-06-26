@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <Folder Include="Infrastructure\ViewModels\" />
+    <Folder Include="Pages\NewFolder\" />
     <Folder Include="wwwroot\css\fonts\" />
   </ItemGroup>
 
