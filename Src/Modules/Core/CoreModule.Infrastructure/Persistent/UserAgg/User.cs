@@ -1,9 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Common.Domain;
+using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Common.Domain;
 
 namespace CoreModule.Infrastructure.Persistent.UserAgg;
 
+
+[Index("Email", IsUnique = true)]
+[Index("PhoneNumber", IsUnique = true)]
 public class User : BaseEntity
 {
     [MaxLength(12)]

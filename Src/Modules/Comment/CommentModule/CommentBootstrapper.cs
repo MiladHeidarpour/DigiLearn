@@ -1,4 +1,6 @@
 ﻿using CommentModule.Context;
+using CommentModule.EventHandlers;
+using CommentModule.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,6 +16,9 @@ public static class CommentBootstrapper
             option.UseSqlServer(config.GetConnectionString("Comment_Context"));
         });
 
+        services.AddScoped<ICommentService, CommentService>();
+        services.AddHostedService<UserRegisteredEventHandler>();
+        services.AddHostedService<UserEditedEventHandler>();
         services.AddAutoMapper(typeof(MapperProfile).Assembly);
         return services;
     }

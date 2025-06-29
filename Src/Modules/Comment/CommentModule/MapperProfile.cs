@@ -6,7 +6,7 @@ namespace CommentModule;
 
 public class MapperProfile:Profile
 {
-    MapperProfile()
+    public MapperProfile()
     {
         CreateMap<Comment, CreateCommentCommand>().ReverseMap();
     }
