@@ -5,7 +5,7 @@ namespace CommentModule.Services.Dtos;
 
 public class CommentFilterResult : BaseFilter<CommentDto>
 {
-
+    public CommentFilterParams FilterParams { get; set; }
 }
 
 public class AllCommentFilterResult : BaseFilter<CommentReplyDto>

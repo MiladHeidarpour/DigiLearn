@@ -18,6 +18,9 @@
 
 <body>
     <div class="overlay"></div>
+    <div class="loading">
+        <img src="/global/loading.svg" alt="loading" />
+    </div>
     <partial name="Header/_MobileMenu" />
 
     <header>
@@ -38,8 +41,8 @@
     <script src="/js/particles.js"></script>
     <script src="/lib/sweetalert2/sweetalert2.min.js"></script>
     <script src="/global/global.js"></script>
+    <script src="/js/Custom.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", false)
-
 </body>
 
 </html>

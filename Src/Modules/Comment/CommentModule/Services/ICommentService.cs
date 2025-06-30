@@ -32,6 +32,7 @@ class CommentService : ICommentService
     {
         var comment = _mapper.Map<Comment>(command);
 
+        comment.Id=Guid.NewGuid();
         comment.Text = comment.Text.SanitizeText();
         comment.IsActive = true;
         _context.Comments.Add(comment);
@@ -55,7 +56,7 @@ class CommentService : ICommentService
     public async Task<CommentDto?> GetCommentById(Guid id)
     {
         var comment = await _context.Comments.Include(c => c.User)
-            .Include(c => c.Replies).FirstOrDefaultAsync(f => f.Id == id);
+            .Include(c => c.Replies).ThenInclude(c=>c.User).FirstOrDefaultAsync(f => f.Id == id);
 
 
         if (comment == null)
@@ -153,7 +154,8 @@ class CommentService : ICommentService
                         Email = s.User.Email.SetUnReadableEmail(),
                         CommentType = s.CommentType
                     }).ToList()
-                }).ToListAsync()
+                }).ToListAsync(),
+            FilterParams = filterParams
         };
         model.GeneratePaging(query, filterParams.Take, filterParams.PageId);
         return model;
