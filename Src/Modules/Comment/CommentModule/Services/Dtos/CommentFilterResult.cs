@@ -1,4 +1,5 @@
-﻿using CommentModule.Domain;
+﻿using System.ComponentModel.DataAnnotations;
+using CommentModule.Domain;
 using Common.Query.Filter;
 
 namespace CommentModule.Services.Dtos;
@@ -19,6 +20,7 @@ public class CommentFilterParams : BaseFilterParam
     public DateTime? EndDate { get; set; }
     public CommentType? CommentType { get; set; } = null;
     public Guid? EntityId { get; set; } = null;
+    [Display(Name = "نام")]
     public string? Name { get; set; }
     public string? Family { get; set; }
 }
