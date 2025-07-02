@@ -13,13 +13,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\Roles\" />
     <Folder Include="Commands\Notifications\Create\" />
     <Folder Include="Commands\Notifications\DeleteAll\" />
     <Folder Include="Queries\Notifications\Dtos\" />
     <Folder Include="Queries\Notifications\GetById\" />
     <Folder Include="Queries\Notifications\GetByFilter\" />
-    <Folder Include="Queries\Roles\Dtos\" />
+    <Folder Include="Queries\Roles\GetById\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -21,6 +21,7 @@ public static class UserBootstrapper
 
         services.AddMediatR(typeof(UserBootstrapper).Assembly);
         services.AddScoped<IUserFacade, UserFacade>();
+        services.AddScoped<IRoleFacade, RoleFacade>();
         services.AddScoped<INotificationFacade, NotificationFacade>();
         services.AddValidatorsFromAssembly(typeof(RegisterUserCommandValidator).Assembly);
         services.AddAutoMapper(typeof(MapperProfile).Assembly);
