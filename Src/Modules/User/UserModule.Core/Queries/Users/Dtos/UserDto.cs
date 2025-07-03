@@ -1,4 +1,6 @@
-﻿namespace UserModule.Core.Queries.Users.Dtos;
+﻿using Common.Query.Filter;
+
+namespace UserModule.Core.Queries.Users.Dtos;
 
 public class UserDto
 {
@@ -11,4 +13,17 @@ public class UserDto
     public string Avatar { get; set; }
     public DateTime CreationDate { get; set; }
     public List<RoleDto> Roles { get; set; } = new();
+}
+
+public class UserFilterResult : BaseFilter<UserDto>
+{
+
+}
+
+public class UserFilterParams : BaseFilterParam
+{
+    public string? Email { get; set; }
+    public string? PhoneNumber { get; set; }
+    public DateTime? StartDate { get; set; }
+    public DateTime? EndDate { get; set; }
 }

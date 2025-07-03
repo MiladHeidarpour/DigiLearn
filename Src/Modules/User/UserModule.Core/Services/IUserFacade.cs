@@ -13,4 +13,5 @@ public interface IUserFacade
     Task<OperationResult> ChangePassword(ChangeUserPasswordCommand command);
     Task<UserDto?> GetUserByPhoneNumber(string phoneNumber);
     Task<UserDto?> GetUserById(Guid id);
+    Task<UserFilterResult> GetUserByFilter(UserFilterParams filterParams);
 }
