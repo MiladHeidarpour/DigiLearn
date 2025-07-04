@@ -1,5 +1,6 @@
 ﻿using Common.Application;
 using MediatR;
+using UserModule.Core.Commands.Users.ChangeAvatar;
 using UserModule.Core.Commands.Users.ChangePassword;
 using UserModule.Core.Commands.Users.Edit;
 using UserModule.Core.Commands.Users.FullEdit;
@@ -26,6 +27,11 @@ public class UserFacade : IUserFacade
     }
 
     public async Task<OperationResult> EditUser(FullEditUserCommand command)
+    {
+        return await _mediator.Send(command);
+    }
+
+    public async Task<OperationResult> ChangeAvatar(ChangeUserAvatarCommand command)
     {
         return await _mediator.Send(command);
     }

@@ -1,6 +1,7 @@
 ﻿using CommentModule.Context;
 using CommentModule.EventHandlers;
 using CommentModule.Services;
+using CoreModule.Infrastructure.EventHandlers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,6 +20,7 @@ public static class CommentBootstrapper
         services.AddScoped<ICommentService, CommentService>();
         services.AddHostedService<UserRegisteredEventHandler>();
         services.AddHostedService<UserEditedEventHandler>();
+        services.AddHostedService<UserChangeAvatarEventHandler>();
         services.AddAutoMapper(typeof(MapperProfile).Assembly);
         return services;
     }

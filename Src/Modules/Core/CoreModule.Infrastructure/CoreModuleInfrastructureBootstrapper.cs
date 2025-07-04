@@ -22,6 +22,7 @@ public class CoreModuleInfrastructureBootstrapper
 
         services.AddHostedService<UserRegisteredEventHandler>();
         services.AddHostedService<UserEditedEventHandler>();
+        services.AddHostedService<UserChangeAvatarEventHandler>();
 
         services.AddDbContext<CoreModuleEFContext>(option =>
         {

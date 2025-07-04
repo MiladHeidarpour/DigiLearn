@@ -13,6 +13,14 @@ public class UserDto
     public string Avatar { get; set; }
     public DateTime CreationDate { get; set; }
     public List<RoleDto> Roles { get; set; } = new();
+
+    public string FullName
+    {
+        get
+        {
+            return $"{Name} {Family}";
+        }
+    }
 }
 
 public class UserFilterResult : BaseFilter<UserDto>
