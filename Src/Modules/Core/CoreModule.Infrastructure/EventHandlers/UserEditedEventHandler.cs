@@ -68,7 +68,7 @@ public class UserEditedEventHandler : BackgroundService
                     oldUser.Family=user.Family;
                     oldUser.PhoneNumber=user.PhoneNumber;
                     oldUser.Email=user.Email;
-                    context.Users.Update(oldUser);
+                    //context.Users.Update(oldUser);
                 }
 
                 await context.SaveChangesAsync(stoppingToken);
@@ -80,7 +80,5 @@ public class UserEditedEventHandler : BackgroundService
             }
         };
         model.BasicConsume(consumer, _queueName, false);
-
-
     }
 }

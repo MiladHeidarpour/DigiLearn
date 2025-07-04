@@ -3,7 +3,7 @@ using Common.Application.SecurityUtil;
 using Microsoft.EntityFrameworkCore;
 using UserModule.Data;
 
-namespace UserModule.Core.Commands.ChangePassword;
+namespace UserModule.Core.Commands.Users.ChangePassword;
 
 public class ChangeUserPasswordCommandHandler : IBaseCommandHandler<ChangeUserPasswordCommand>
 {

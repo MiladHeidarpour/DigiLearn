@@ -78,7 +78,5 @@ public class UserEditedEventHandler : BackgroundService
             }
         };
         model.BasicConsume(consumer, _queueName, false);
-
-
     }
 }

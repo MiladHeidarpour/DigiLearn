@@ -20,30 +20,36 @@ public class EditUserCommandHandler : IBaseCommandHandler<EditUserCommand>
     public async Task<OperationResult> Handle(EditUserCommand request, CancellationToken cancellationToken)
     {
         var user = await _context.Users.FirstOrDefaultAsync(f => f.Id == request.UserId, cancellationToken);
-        if (user is null)
+        if (user == null)
         {
-            return OperationResult.NotFound("کاربری یافت نشد");
+            return OperationResult.NotFound();
         }
         user.Name = request.Name;
         user.Family = request.Family;
-
-        if (string.IsNullOrWhiteSpace(request.Email) is false)
+        if (string.IsNullOrWhiteSpace(request.Email) == false)
         {
-            user.Email = request.Email;
+            if (await EmailIsDuplicated(request.Email))
+            {
+                return OperationResult.Error("ایمیل وارد شده تکراری است");
+            }
+            user.Email = request.Email.ToLower();
         }
 
-        _context.Users.Update(user);
         await _context.SaveChangesAsync(cancellationToken);
-
         _eventBus.Publish(new UserEdited()
         {
-            UserId = user.Id,
             Email = user.Email,
-            Name = user.Name,
             Family = user.Family,
-            PhoneNumber= user.PhoneNumber,
+            Name = user.Name,
+            UserId = user.Id,
+            PhoneNumber = user.PhoneNumber
         }, null, Exchanges.UserTopicExchange, ExchangeType.Topic, "user.edited");
-
         return OperationResult.Success();
     }
+
+    private async Task<bool> EmailIsDuplicated(string email)
+    {
+        return await _context.Users.AnyAsync(f => f.Email == email.ToLower());
+    }
 }
+    
