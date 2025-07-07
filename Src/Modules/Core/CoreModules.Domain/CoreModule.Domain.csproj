@@ -18,6 +18,7 @@
   <ItemGroup>
     <Folder Include="CourseAgg\Events\" />
     <Folder Include="CourseAgg\Exceptions\" />
+    <Folder Include="OrderAgg\DomainServices\" />
   </ItemGroup>
 
   <ItemGroup>
