@@ -1,4 +1,5 @@
-﻿using CoreModule.Query._Data.Entities;
+﻿using CoreModule.Domain.OrderAgg.Models;
+using CoreModule.Query._Data.Entities;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -17,6 +18,8 @@ class QueryContext : DbContext
     public DbSet<SectionQueryModel> Sections { get; set; }
     public DbSet<EpisodeQueryModel> Episodes { get; set; }
     public DbSet<CategoryQueryModel> CourseCategories { get; set; }
+    public DbSet<OrderQueryModel> Orders { get; set; }
+    public DbSet<OrderItem> OrderItems { get; set; }
 
     public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
     {

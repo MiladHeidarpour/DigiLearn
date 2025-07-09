@@ -5,5 +5,5 @@ namespace CoreModule.Domain.OrderAgg.Repositories;
 
 public interface IOrderRepository:IBaseRepository<Order>
 {
-    
+    Task<Order?> GetCurrentOrderByUserId(Guid userId);
 }

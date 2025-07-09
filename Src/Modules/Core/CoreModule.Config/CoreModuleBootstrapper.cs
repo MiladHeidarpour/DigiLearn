@@ -2,16 +2,17 @@
 using CoreModule.Application.CategoryAgg;
 using CoreModule.Application.CategoryAgg.Create;
 using CoreModule.Application.CourseAgg;
+using CoreModule.Application.OrderAgg;
 using CoreModule.Application.TeacherAgg;
 using CoreModule.Domain.CategoryAgg.DomainServices;
 using CoreModule.Domain.CourseAgg.DomainServices;
+using CoreModule.Domain.OrderAgg.DomainServices;
 using CoreModule.Domain.TeacherAgg.DomainServices;
 using CoreModule.Facade;
 using CoreModule.Infrastructure;
 using CoreModule.Query;
 using FluentValidation;
 using MediatR;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
 
@@ -31,6 +32,7 @@ public static class CoreModuleBootstrapper
         services.AddScoped<ICourseDomainService, CourseDomainService>();
         services.AddScoped<ITeacherDomainService, TeacherDomainService>();
         services.AddScoped<ICategoryDomainService, CategoryDomainService>();
+        services.AddScoped<IOrderDomainService, OrderDomainService>();
 
         return services;
     }

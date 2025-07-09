@@ -1,6 +1,7 @@
 ﻿using Common.Infrastructure;
 using CoreModule.Domain.CategoryAgg.Models;
 using CoreModule.Domain.CourseAgg.Models;
+using CoreModule.Domain.OrderAgg.Models;
 using CoreModule.Domain.TeacherAgg.Models;
 using CoreModule.Infrastructure.Persistent.CourseAgg;
 using CoreModule.Infrastructure.Persistent.UserAgg;
@@ -19,6 +20,7 @@ public class CoreModuleEFContext:BaseEfContext<CoreModuleEFContext>
     public DbSet<Teacher> Teachers { get; set; }
     public DbSet<CourseCategory> Categories { get; set; }
     public DbSet<User> Users { get; set; }
+    public DbSet<Order> Orders { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {

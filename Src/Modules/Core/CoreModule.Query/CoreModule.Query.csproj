@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <Folder Include="CategoryAgg\GetChildren\" />
+    <Folder Include="OrderAgg\GetByFilter\" />
     <Folder Include="TeacherAgg\_Dtos\" />
   </ItemGroup>
 
