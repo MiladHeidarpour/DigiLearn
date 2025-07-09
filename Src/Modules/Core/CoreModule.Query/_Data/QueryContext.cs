@@ -19,7 +19,7 @@ class QueryContext : DbContext
     public DbSet<EpisodeQueryModel> Episodes { get; set; }
     public DbSet<CategoryQueryModel> CourseCategories { get; set; }
     public DbSet<OrderQueryModel> Orders { get; set; }
-    public DbSet<OrderItem> OrderItems { get; set; }
+    public DbSet<OrderItemQueryModel> OrderItems { get; set; }
 
     public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
     {

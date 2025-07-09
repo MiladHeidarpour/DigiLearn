@@ -3,7 +3,7 @@ using CoreModule.Domain.OrderAgg.Repositories;
 
 namespace CoreModule.Application.OrderAgg.RemoveItem;
 
-public record RemoveOrderItemCommand(Guid UserId, Guid CourseId) : IBaseCommand;
+public record RemoveOrderItemCommand(Guid UserId, Guid Id) : IBaseCommand;
 
 public class RemoveOrderItemCommandHandler : IBaseCommandHandler<RemoveOrderItemCommand>
 {
@@ -22,7 +22,7 @@ public class RemoveOrderItemCommandHandler : IBaseCommandHandler<RemoveOrderItem
             return OperationResult.NotFound();
         }
 
-        order.RemoveItem(request.CourseId);
+        order.RemoveItem(request.Id);
         await _orderRepository.Save();
         return OperationResult.Success();
     }

@@ -14,19 +14,32 @@ public class TeacherActionFilter:ActionFilterAttribute
         _teacherFacade = teacherFacade;
     }
 
-    public override async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
+    public override async Task OnResultExecutionAsync(ResultExecutingContext context, ResultExecutionDelegate next)
     {
-        if (context.HttpContext.User.Identity.IsAuthenticated is false)
-        {
+        if (context.HttpContext.User.Identity.IsAuthenticated == false)
             context.Result = new RedirectResult("/");
-        }
 
         var teacher = await _teacherFacade.GetByUserId(context.HttpContext.User.GetUserId());
-        if (teacher is null || teacher.Status is not TeacherStatus.Active)
-        {
-            context.Result = new RedirectResult("/profile");
-        }
 
-        await next();
+        if (teacher == null || teacher.Status != TeacherStatus.Active)
+            context.Result = new RedirectResult("/Profile");
+        await base.OnResultExecutionAsync(context, next);
     }
+
+
+    //public override async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
+    //{
+    //    if (context.HttpContext.User.Identity.IsAuthenticated is false)
+    //    {
+    //        context.Result = new RedirectResult("/");
+    //    }
+
+    //    var teacher = await _teacherFacade.GetByUserId(context.HttpContext.User.GetUserId());
+    //    if (teacher is null || teacher.Status is not TeacherStatus.Active)
+    //    {
+    //        context.Result = new RedirectResult("/profile");
+    //    }
+
+    //    await next();
+    //}
 }

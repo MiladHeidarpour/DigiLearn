@@ -1,4 +1,5 @@
-﻿using Common.Domain;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using Common.Domain;
 
 namespace CoreModule.Query._Data.Entities;
 
@@ -10,6 +11,9 @@ class OrderQueryModel : BaseEntity
     public string? DiscountCode { get; set; }
     public DateTime? PaymentDate { get; set; }
     public List<OrderItemQueryModel> OrderItems { get; set; }
+
+
+    [ForeignKey("UserId")]
     public UserQueryModel User { get; set; }
 }
 class OrderItemQueryModel : BaseEntity
@@ -17,5 +21,8 @@ class OrderItemQueryModel : BaseEntity
     public Guid CourseId { get; set; }
     public Guid OrderId { get; set; }
     public int Price { get; set; }
+
+    [ForeignKey("OrderId")]
+    public OrderQueryModel Order { get; set; }
     public CourseQueryModel Course { get; set; }
 }
