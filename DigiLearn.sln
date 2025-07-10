@@ -61,6 +61,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Comment", "Comment", "{02EA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommentModule", "Src\Modules\Comment\CommentModule\CommentModule.csproj", "{EAF1A62F-C08D-481A-9AA1-A496B18049C6}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Transaction", "Transaction", "{3266A065-402B-43A3-96A4-FE5E284FF6A0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransactionModule", "Src\Modules\Transaction\TransactionModule\TransactionModule.csproj", "{F146F098-A9D8-48DF-8511-7230A7E725E3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -135,6 +139,10 @@ Global
 		{EAF1A62F-C08D-481A-9AA1-A496B18049C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EAF1A62F-C08D-481A-9AA1-A496B18049C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EAF1A62F-C08D-481A-9AA1-A496B18049C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F146F098-A9D8-48DF-8511-7230A7E725E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F146F098-A9D8-48DF-8511-7230A7E725E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F146F098-A9D8-48DF-8511-7230A7E725E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F146F098-A9D8-48DF-8511-7230A7E725E3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -165,6 +173,8 @@ Global
 		{06DB6ECF-247C-4448-9E6A-80E88D7F857A} = {0D36B1EF-3666-4518-AE4B-A4AB4E861302}
 		{02EA681E-C7D8-13C7-8484-4AC65E1B71E8} = {FC1505F1-F0E3-4B2F-8A3A-FB3A69AB0610}
 		{EAF1A62F-C08D-481A-9AA1-A496B18049C6} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{3266A065-402B-43A3-96A4-FE5E284FF6A0} = {FC1505F1-F0E3-4B2F-8A3A-FB3A69AB0610}
+		{F146F098-A9D8-48DF-8511-7230A7E725E3} = {3266A065-402B-43A3-96A4-FE5E284FF6A0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7F7ED1B9-3A41-4505-9D51-14C1ED449486}

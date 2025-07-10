@@ -1,11 +1,13 @@
 ﻿using CoreModule.Domain.CategoryAgg.Repositories;
 using CoreModule.Domain.CourseAgg.Repositories;
+using CoreModule.Domain.HelperEntities.Repositories;
 using CoreModule.Domain.OrderAgg.Repositories;
 using CoreModule.Domain.TeacherAgg.Repositories;
 using CoreModule.Infrastructure.EventHandlers;
 using CoreModule.Infrastructure.Persistent;
 using CoreModule.Infrastructure.Persistent.CategoryAgg;
 using CoreModule.Infrastructure.Persistent.CourseAgg;
+using CoreModule.Infrastructure.Persistent.HelperEntities.Repositories;
 using CoreModule.Infrastructure.Persistent.OrderAgg;
 using CoreModule.Infrastructure.Persistent.TeacherAgg;
 using Microsoft.EntityFrameworkCore;
@@ -22,6 +24,7 @@ public class CoreModuleInfrastructureBootstrapper
         services.AddScoped<ITeacherRepository, TeacherRepository>();
         services.AddScoped<ICourseCategoryRepository, CourseCategoryRepository>();
         services.AddScoped<IOrderRepository, OrderRepository>();
+        services.AddScoped<ICourseStudentRepository, CourseStudentRepository>();
 
         services.AddHostedService<UserRegisteredEventHandler>();
         services.AddHostedService<UserEditedEventHandler>();

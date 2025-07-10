@@ -4,6 +4,7 @@ using CoreModule.Infrastructure.Persistent;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CoreModule.Infrastructure.Migrations
 {
     [DbContext(typeof(CoreModuleEFContext))]
-    partial class CoreModuleEFContextModelSnapshot : ModelSnapshot
+    [Migration("20250710100802_Init_CourseStudent")]
+    partial class Init_CourseStudent
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
