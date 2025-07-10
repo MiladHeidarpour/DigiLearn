@@ -49,9 +49,9 @@ public class TransactionController : Controller
         var transactionId = await _transactionService.CreateTransaction(command);
 
 
-        var payment = await _zarinPalService.CreatePaymentRequest(
+        var payment = await _zarinPalService.SandBox_CreatePaymentRequest(
             command.PaymentAmount, $"پرداخت تراکنش شماره {transactionId}",
-            $"https://localhost:7197/Transaction/Zarinpal-Verify/{transactionId}");
+            $"https://localhost:7111/Transaction/Zarinpal-Verify/{transactionId}");
 
         if (payment?.Status == 100)
         {

@@ -7,7 +7,20 @@ using TransactionModule.Services.ZarinPal.Dtos.UnVerification;
 using TransactionModule.Services.ZarinPal.Dtos.Verification;
 
 namespace TransactionModule.Services.ZarinPal;
+public class ZarinpalRequestResponse
+{
+    public ZarinpalData Data { get; set; }
+    public object Errors { get; set; }
+}
 
+public class ZarinpalData
+{
+    public int Code { get; set; }
+    public string Message { get; set; }
+    public string Authority { get; set; }
+    public string Fee_Type { get; set; }
+    public int Fee { get; set; }
+}
 public class ZarinPalService : IZarinPalService
 {
     private string MerchantId { get; }
@@ -154,30 +167,40 @@ public class ZarinPalService : IZarinPalService
         string callBackUrl,
         string mobile = null, string email = null)
     {
-        var client = new RestClient(SandBoxPaymentUrl);
+        // Use the official API endpoint
+        var client = new RestClient("https://sandbox.zarinpal.com/pg/v4/payment/request.json");
         var request = new RestRequest(Method.POST);
         request.AddHeader("Content-Type", "application/json");
-        request.AddHeader("Content-Type", "application/json");
-        //Zarin pal Amount Type = Rial
-        //For Convert Tooman TO Rial Should do amount * 10 
+
         var body = new
         {
-            MerchantID = "4ced0a1e-XXXX-XXXX-XXXX-3ea3ae8e8897",
-            Amount = amount,
-            CallbackURL = callBackUrl,
-            Description = description
+            merchant_id = "1f7a8a5a-8a15-4607-9265-8f23eb58886c", // Use snake_case
+            amount = amount*10, // Zarinpal requires amount in Rial
+            callback_url = callBackUrl, // Use snake_case
+            description = description,
+            mobile= mobile,
+            email=email,
         };
         request.AddJsonBody(body);
-        var response = await client.ExecuteAsync<SandBoxPaymentResponse>(request);
-        var result = response.Data;
 
+        var response = await client.ExecuteAsync<ZarinpalRequestResponse>(request);
+
+        // Check for successful response (Code == 100 in nested Data object)
+        if (response.IsSuccessful && response.Data?.Data != null && response.Data.Data.Code == 100)
+        {
+            return new PaymentResponseData()
+            {
+                Status = 100, // Success status
+                Authority = response.Data.Data.Authority,
+                GateWayUrl = "https://sandbox.zarinpal.com/pg/StartPay/" + response.Data.Data.Authority
+            };
+        }
+
+        // Return a failure response if anything goes wrong
         return new PaymentResponseData()
         {
-            Status = result.Status,
-            Message = " ",
-            Authority = result.Authority,
-            Fee = 0,
-            GateWayUrl = SandBoxGateWayUrl + result.Authority
+            Status = -1, // Failure status
+            Message = "Failed to create payment request."
         };
     }
 
