@@ -49,7 +49,7 @@ public class UserTransactionService : IUserTransactionService
     public async Task<UserTransactionFilterDto> GetTransactionsByFilter(UserTransactionFilterParams queryParams)
     {
         var result = _context.UserTransactions
-            .OrderByDescending(d => d.CreateDate).AsQueryable();
+            .OrderByDescending(d => d.CreationDate).AsQueryable();
 
 
         if (queryParams.TransactionFor != null)
@@ -64,13 +64,13 @@ public class UserTransactionService : IUserTransactionService
         if (queryParams.StartDate != null)
         {
             DateTime startDate = (DateTime)queryParams.StartDate;
-            result = result.Where(r => (r.PaymentDate != null && r.PaymentDate >= queryParams.StartDate) || r.CreateDate >= startDate);
+            result = result.Where(r => (r.PaymentDate != null && r.PaymentDate >= queryParams.StartDate) || r.CreationDate >= startDate);
         }
 
         if (queryParams.EndDate != null)
         {
             var endDate = (DateTime)queryParams.EndDate;
-            result = result.Where(r => r.PaymentDate != null && r.PaymentDate <= queryParams.EndDate || r.CreateDate <= endDate);
+            result = result.Where(r => r.PaymentDate != null && r.PaymentDate <= queryParams.EndDate || r.CreationDate <= endDate);
         }
 
         var skip = (queryParams.PageId - 1) * queryParams.Take;
@@ -90,7 +90,7 @@ public class UserTransactionService : IUserTransactionService
                     PaymentDate = s.PaymentDate,
                     Authority = s.Authority,
                     CardPan = s.CardPan,
-                    CreateDate = s.CreateDate,
+                    CreateDate = s.CreationDate,
                     Id = s.Id,
                     PaymentAmount = s.PaymentAmount,
                     PaymentErrorMessage = s.PaymentErrorMessage,
@@ -132,13 +132,13 @@ public class UserTransactionService : IUserTransactionService
         if (!string.IsNullOrEmpty(stDate))
         {
             DateTime startDate = (DateTime)stDate.ToMiladi();
-            result = result.Where(r => (r.PaymentDate != null && r.PaymentDate >= stDate.ToMiladi()) || r.CreateDate >= startDate);
+            result = result.Where(r => (r.PaymentDate != null && r.PaymentDate >= stDate.ToMiladi()) || r.CreationDate >= startDate);
         }
 
         if (!string.IsNullOrEmpty(eDate))
         {
             var endDate = (DateTime)eDate.ToMiladi();
-            result = result.Where(r => r.PaymentDate != null && r.PaymentDate <= eDate.ToMiladi() || r.CreateDate <= endDate);
+            result = result.Where(r => r.PaymentDate != null && r.PaymentDate <= eDate.ToMiladi() || r.CreationDate <= endDate);
         }
 
         var res = await result.ToListAsync();

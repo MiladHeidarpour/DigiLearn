@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <Folder Include="Infrastructure\ViewModels\" />
-    <Folder Include="Pages\NewFolder\" />
     <Folder Include="wwwroot\css\fonts\" />
   </ItemGroup>
 
@@ -20,6 +19,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Zarinpal" Version="3.0.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,6 +28,7 @@
     <ProjectReference Include="..\..\Modules\Comment\CommentModule\CommentModule.csproj" />
     <ProjectReference Include="..\..\Modules\Core\CoreModule.Config\CoreModule.Config.csproj" />
     <ProjectReference Include="..\..\Modules\Ticket\TicketModule\TicketModule.csproj" />
+    <ProjectReference Include="..\..\Modules\Transaction\TransactionModule\TransactionModule.csproj" />
     <ProjectReference Include="..\..\Modules\User\UserModule.Core\UserModule.Core.csproj" />
   </ItemGroup>
 

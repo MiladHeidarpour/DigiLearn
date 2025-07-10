@@ -6,6 +6,7 @@ using CoreModule.Config;
 using DigiLearn.Web.Infrastructure;
 using DigiLearn.Web.Infrastructure.JwtUtil;
 using TicketModule;
+using TransactionModule;
 using UserModule.Core;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,6 +24,7 @@ builder.Services
     .InitCoreModule(builder.Configuration)
     .InitBlogModule(builder.Configuration)
     .InitCommentModule(builder.Configuration)
+    .InitTransactionModule(builder.Configuration)
     .RegisterWebDependencies();
 
 builder.Services.AddJwtAuthentication(builder.Configuration);
