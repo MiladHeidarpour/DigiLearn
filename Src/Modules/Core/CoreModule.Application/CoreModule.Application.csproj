@@ -10,6 +10,7 @@
     <Folder Include="CategoryAgg\Delete\" />
     <Folder Include="CourseAgg\Sections\Edit\" />
     <Folder Include="CourseAgg\Sections\Delete\" />
+    <Folder Include="OrderAgg\_EventHandlers\" />
   </ItemGroup>
 
   <ItemGroup>

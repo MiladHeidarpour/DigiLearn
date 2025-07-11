@@ -92,7 +92,7 @@ public class TransactionController : Controller
 
         try
         {
-            var result = await _zarinPalService.CreateVerificationRequest(authority, transaction.PaymentAmount);
+            var result = await _zarinPalService.SandBox_CreateVerificationRequest(authority, transaction.PaymentAmount);
             if (result.Status == 100)
             {
                 TempData["Success"] = true;
@@ -136,7 +136,7 @@ public class TransactionController : Controller
                     if (order.TotalPrice != transaction.PaymentAmount)
                         throw new InvalidDataException("اطلاعات پرداخت با اطلاعات سفارش همخوانی ندارند");
 
-                    //await _courseOrder.FinallyOrder(order);
+                    await _orderFacade.FinallyOrder(order.Id);
                     //await AddCourseStudent(order);
                     //await _callCenterProfitService.ProfitCalculation(order);
                     break;

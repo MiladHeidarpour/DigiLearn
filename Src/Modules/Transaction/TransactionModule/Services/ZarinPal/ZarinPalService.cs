@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using RestSharp;
+using System.Reflection;
 using TransactionModule.Services.ZarinPal.Dtos.Payment;
 using TransactionModule.Services.ZarinPal.Dtos.RefFound;
 using TransactionModule.Services.ZarinPal.Dtos.UnVerification;
@@ -204,31 +205,102 @@ public class ZarinPalService : IZarinPalService
         };
     }
 
+    //public async Task<FinallyVerificationResponse> SandBox_CreateVerificationRequest(string authority, int price)
+    //{
+    //    var client = new RestClient(SandBoxVerifyUrl);
+    //    var request = new RestRequest(Method.POST);
+    //    request.AddHeader("Content-Type", "application/json");
+
+    //    //Zarin pal Amount Type = Rial
+    //    //For Convert Tooman TO Rial Should do amount * 10 
+    //    var body = new
+    //    {
+    //        merchant_id = "1f7a8a5a-8a15-4607-9265-8f23eb58886c", // Use snake_case
+    //        amount = price, // Zarinpal requires amount in Rial
+    //        callback_url = callBackUrl, // Use snake_case
+
+    //    };
+    //    var body = new
+    //    {
+    //        Amount = price,
+    //        MerchantID = "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
+    //        Authority = authority
+    //    };
+    //    request.AddJsonBody(body);
+    //    var response = await client.ExecuteAsync<SandBoxVerificationResponse>(request);
+    //    var result = response.Data;
+
+    //    return new FinallyVerificationResponse()
+    //    {
+    //        RefId = result.RefId,
+    //        Message = " ",
+    //        Status = result.Status
+    //    };
+    //}
+
     public async Task<FinallyVerificationResponse> SandBox_CreateVerificationRequest(string authority, int price)
     {
-        var client = new RestClient(SandBoxVerifyUrl);
+        var client = new RestClient("https://sandbox.zarinpal.com/pg/v4/payment/verify.json");
         var request = new RestRequest(Method.POST);
         request.AddHeader("Content-Type", "application/json");
 
-        //Zarin pal Amount Type = Rial
-        //For Convert Tooman TO Rial Should do amount * 10 
         var body = new
         {
-            Amount = price,
-            MerchantID = "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
-            Authority = authority
+            merchant_id = "1f7a8a5a-8a15-4607-9265-8f23eb58886c", // !!! مرچنت کد تست خود را اینجا قرار بده
+            amount = price*10,
+            authority = authority
         };
         request.AddJsonBody(body);
-        var response = await client.ExecuteAsync<SandBoxVerificationResponse>(request);
-        var result = response.Data;
+
+        var response = await client.ExecuteAsync<ZarinpalVerificationResponse>(request);
+
+        // Check if the API call was successful and the transaction was verified (Code 100 or 101)
+        if (response.IsSuccessful && response.Data?.Data != null && (response.Data.Data.Code == 100 || response.Data.Data.Code == 101))
+        {
+            return new FinallyVerificationResponse()
+            {
+                Status = response.Data.Data.Code,
+                RefId = response.Data.Data.Ref_Id,
+                CardPan = response.Data.Data.Card_Pan,
+                Message = response.Data.Data.Message
+            };
+        }
+
+        // Handle failures by extracting error code and message
+        int errorCode = -1; // Default error code
+        string errorMessage = "Verification failed.";
+
+        if (response.Data?.Errors is Newtonsoft.Json.Linq.JObject errorObject)
+        {
+            errorCode = errorObject.Value<int>("code");
+            errorMessage = errorObject.Value<string>("message");
+        }
 
         return new FinallyVerificationResponse()
         {
-            RefId = result.RefId,
-            Message = " ",
-            Status = result.Status
+            Status = errorCode,
+            Message = errorMessage
         };
     }
 
     #endregion
+}
+
+// Top-level response wrapper
+public class ZarinpalVerificationResponse
+{
+    public ZarinpalVerificationData Data { get; set; }
+    public object Errors { get; set; }
+}
+
+// Nested data object containing the verification details
+public class ZarinpalVerificationData
+{
+    public int Code { get; set; }
+    public string Message { get; set; }
+    public string Card_Hash { get; set; }
+    public string Card_Pan { get; set; }
+    public long Ref_Id { get; set; }
+    public string Fee_Type { get; set; }
+    public int Fee { get; set; }
 }
