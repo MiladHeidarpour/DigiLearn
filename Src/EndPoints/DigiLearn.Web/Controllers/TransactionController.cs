@@ -137,8 +137,11 @@ public class TransactionController : Controller
                         throw new InvalidDataException("اطلاعات پرداخت با اطلاعات سفارش همخوانی ندارند");
 
                     await _orderFacade.FinallyOrder(order.Id);
-                    //await AddCourseStudent(order);
-                    //await _callCenterProfitService.ProfitCalculation(order);
+                    foreach (var item in order.OrderItems)
+                    {
+                        await _courseFacade.AddStudent(item.CourseId, order.UserId);
+                    }
+                    ;
                     break;
                 }
 

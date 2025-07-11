@@ -6,6 +6,8 @@ using CoreModule.Application.CourseAgg.Episodes.Add;
 using CoreModule.Application.CourseAgg.Episodes.Delete;
 using CoreModule.Application.CourseAgg.Episodes.Edit;
 using CoreModule.Application.CourseAgg.Sections.Add;
+using CoreModule.Application.HelperEntities.CourseStudent.Create;
+using CoreModule.Application.HelperEntities.CourseStudent.Delete;
 using CoreModule.Query.CourseAgg._Dtos;
 using CoreModule.Query.CourseAgg.Episodes.GetById;
 using CoreModule.Query.CourseAgg.GetByFilter;
@@ -23,6 +25,11 @@ public interface ICourseFacade
     Task<CourseDto?> GetById(Guid id);
     Task<CourseDto?> GetBySlug(string slug);
     Task<EpisodeDto?> GetEpisodeById(Guid id);
+
+
+
+    Task<OperationResult?> AddStudent(Guid courseId,Guid userId);
+    Task<OperationResult?> DeleteStudent(Guid courseId, Guid userId);
 
     Task<OperationResult> AddSection(AddCourseSectionCommand command);
     Task<OperationResult> AddEpisode(AddCourseEpisodeCommand command);
@@ -68,6 +75,16 @@ public class CourseFacade : ICourseFacade
     public async Task<EpisodeDto?> GetEpisodeById(Guid id)
     {
         return await _mediator.Send(new GetEpisodeByIdQuery(id));
+    }
+
+    public async Task<OperationResult?> AddStudent(Guid courseId, Guid userId)
+    {
+        return await _mediator.Send(new CreateCourseStudentCommand(courseId, userId));
+    }
+
+    public async Task<OperationResult?> DeleteStudent(Guid courseId, Guid userId)
+    {
+        return await _mediator.Send(new DeleteCourseStudentCommand(courseId, userId));
     }
 
     public async Task<OperationResult> AddSection(AddCourseSectionCommand command)
